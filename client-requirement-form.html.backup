@@ -1,0 +1,3760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Development Client Requirement Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 20px;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 100%;
+            margin: 0;
+            background: white;
+            border-radius: 0;
+            box-shadow: none;
+            overflow: visible;
+            display: flex;
+            min-height: 100vh;
+            gap: 0;
+        }
+
+        .sidebar {
+            width: 320px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            padding: 135px 25px;
+            flex-shrink: 0;
+            overflow-y: auto;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            z-index: 100;
+        }
+
+        .sidebar h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-item {
+            margin-bottom: 12px;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 15px 18px;
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-weight: 600;
+        }
+
+        .nav-link.completed {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .nav-link.completed::after {
+            content: ' ✓';
+            color: #4ade80;
+        }
+
+        .form-content {
+            flex: 1;
+            padding: 0 30px;
+            overflow-y: auto;
+            width: 100%;
+            margin-left: 320px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            margin: 0;
+        }
+
+        .header-logo {
+            max-width: 350px;
+            height: auto;
+            margin: 0 0 20px 0;
+        }
+
+        /* Page Content Tabs Styles */
+        .page-content-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+            padding: 10px 0;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .page-tab-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 16px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #495057;
+            transition: all 0.3s ease;
+        }
+
+        .page-tab-btn:hover {
+            background: #e9ecef;
+            border-color: #dee2e6;
+        }
+
+        .page-tab-btn.active {
+            background: #3498db;
+            border-color: #3498db;
+            color: white;
+        }
+
+        .page-tab-btn .tab-tick {
+            background: #28a745;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            margin-left: 4px;
+        }
+
+        .page-tab-btn.active .tab-tick {
+            background: rgba(255,255,255,0.3);
+            color: white;
+        }
+
+        /* Contact Form Builder Styles */
+        .contact-form-section {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .contact-field-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .contact-field-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .contact-field-checkbox:hover {
+            border-color: #3498db;
+            background: #f8f9fa;
+        }
+
+        .contact-field-checkbox input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .contact-field-checkbox .field-icon {
+            font-size: 1.2rem;
+        }
+
+        .contact-field-checkbox .field-label {
+            font-weight: 500;
+            color: #495057;
+        }
+
+        .add-custom-field-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .add-custom-field-btn:hover {
+            background: #218838;
+            transform: translateY(-1px);
+        }
+
+        .add-custom-field-btn span {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .custom-field-row {
+            display: flex;
+            align-items: flex-end;
+            gap: 15px;
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+        }
+
+        .custom-field-inputs {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 15px;
+            flex: 1;
+        }
+
+        .remove-custom-field-btn {
+            width: 36px;
+            height: 36px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .remove-custom-field-btn:hover {
+            background: #c82333;
+        }
+
+        @media (max-width: 768px) {
+            .contact-field-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .custom-field-inputs {
+                grid-template-columns: 1fr;
+            }
+
+            .custom-field-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+
+        .page-content-container {
+            position: relative;
+        }
+
+        .page-content-panel {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .page-content-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .page-content-section {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .page-content-header {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .page-content-header h4 {
+            margin: 0;
+            color: #2c3e50;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin: 0 0 10px 0;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .form-content {
+            padding: 0 30px;
+        }
+
+        .section {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid #e9ecef;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            font-size: 2.2rem;
+            margin: 0 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e1e8ed;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 18px;
+            color: #2c3e50;
+        }
+
+        .form-group label.required::after {
+            content: " *";
+            color: #dc3545;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group input[type="url"],
+        .form-group input[type="date"],
+        .form-group input[type="number"],
+        .form-group input[type="password"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 18px;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-group input.error,
+        .form-group select.error,
+        .form-group textarea.error {
+            border-color: #dc3545;
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper input[type="password"] {
+            padding-right: 45px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #6c757d;
+            padding: 5px;
+            z-index: 10;
+            min-width: 30px;
+            min-height: 30px;
+        }
+
+        .password-toggle:hover {
+            color: #667eea;
+        }
+
+        .file-upload {
+            margin-top: 10px;
+            padding: 15px;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+
+        .file-upload label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        .file-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+            cursor: pointer;
+        }
+
+        .file-input:hover {
+            border-color: #667eea;
+        }
+
+        .file-name {
+            display: block;
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        /* Section styles for sidebar navigation */
+        .form-section {
+            display: none;
+            scroll-margin-top: 20px;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        .section-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 2px solid #e0e0e0;
+            margin-bottom: 20px;
+        }
+
+        .section-header:hover {
+            border-color: #667eea;
+        }
+
+        .section-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .section-toggle {
+            font-size: 1.5rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+
+        .section-toggle.collapsed {
+            transform: rotate(-90deg);
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .form-group.error .error-message {
+            display: block;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .radio-option,
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .radio-option input[type="radio"],
+        .checkbox-option input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #667eea;
+        }
+
+        .conditional-field {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .conditional-field.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .row-three {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .btn-add {
+            background: #28a745;
+            color: white;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+        }
+
+        .btn-add:hover {
+            background: #218838;
+        }
+
+        .btn-remove {
+            background: #dc3545;
+            color: white;
+            padding: 8px 15px;
+            font-size: 0.85rem;
+        }
+
+        .btn-remove:hover {
+            background: #c82333;
+        }
+
+        .dynamic-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #e9ecef;
+            position: relative;
+        }
+
+        .dynamic-item .btn-remove {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .submit-section {
+            text-align: center;
+            padding: 40px;
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .submit-section .btn {
+            padding: 15px 50px;
+            font-size: 1.1rem;
+        }
+
+        .section-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 20px;
+            padding-bottom: 30px;
+            border-top: 2px solid #e9ecef;
+        }
+
+        .nav-btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn-prev {
+            background: #6c757d;
+            color: white;
+        }
+
+        .nav-btn-prev:hover {
+            background: #5a6268;
+            transform: translateX(-3px);
+        }
+
+        .nav-btn-next {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .nav-btn-next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+                min-height: auto;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                border-radius: 20px 20px 0 0;
+                padding: 20px;
+                position: relative;
+                top: auto;
+                left: auto;
+                z-index: auto;
+            }
+
+            .form-content {
+                padding: 30px 20px;
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .row,
+            .row-three {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .form-content {
+                padding: 20px 15px;
+            }
+
+            .section {
+                padding: 20px 15px;
+            }
+
+            .section-navigation {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .nav-btn {
+                width: 100%;
+            }
+        }
+
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .thank-you-section {
+            display: none;
+            text-align: center;
+            padding: 60px 40px;
+        }
+
+        .thank-you-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .thank-you-icon {
+            font-size: 80px;
+            color: #4ade80;
+            margin-bottom: 30px;
+            animation: scaleIn 0.5s ease;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .thank-you-section h1 {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .thank-you-section p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .thank-you-section .btn {
+            margin-top: 30px;
+        }
+
+        .navigation-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .navigation-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            cursor: move;
+            transition: all 0.2s ease;
+        }
+
+        .navigation-item:hover {
+            background: #e9ecef;
+            border-color: #dee2e6;
+        }
+
+        .navigation-item.dragging {
+            opacity: 0.5;
+            background: #e3f2fd;
+            border-color: #2196f3;
+        }
+
+        .navigation-item .drag-handle {
+            margin-right: 12px;
+            color: #6c757d;
+            font-size: 1.2rem;
+            cursor: grab;
+        }
+
+        .navigation-item .drag-handle:active {
+            cursor: grabbing;
+        }
+
+        .navigation-item .page-name {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .navigation-item .remove-btn {
+            margin-left: 12px;
+            color: #dc3545;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .navigation-item .remove-btn:hover {
+            background: #fee;
+        }
+
+        .loader-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .loader-overlay.show {
+            display: flex;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loader-text {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .auto-save-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .auto-save-indicator.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .clear-data-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .clear-data-btn:hover {
+            background: #c82333;
+        }
+
+        .color-picker-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .color-picker-wrapper input[type="color"] {
+            width: 50px;
+            height: 40px;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 2px;
+        }
+
+        .color-picker-wrapper input[type="text"] {
+            flex: 1;
+        }
+
+        .page-count-badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h3>Form Sections</h3>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#project-basics" class="nav-link active" data-section="project-basics">1. Project Basics</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#technical" class="nav-link" data-section="technical">2. Technical Setup</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#content" class="nav-link" data-section="content">3. Content & Branding</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#products" class="nav-link" data-section="products">4. Products & Features</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#marketing" class="nav-link" data-section="marketing">5. Marketing & SEO</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#final" class="nav-link" data-section="final">6. Final Details</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="form-content">
+            <div class="header">
+                <img src="Rechh looo.png" alt="Logo" class="header-logo">
+                <h1>Website Development Client Requirement Form</h1>
+                <p>Fill what you know. Leave the rest to us.</p>
+            </div>
+
+            <form id="requirementForm" novalidate>
+                <div class="success-message" id="successMessage">
+                    <strong>Success!</strong> Your form has been submitted. Check the console for the form data.
+                </div>
+
+                <!-- Thank You Section (hidden by default) -->
+                <div class="thank-you-section" id="thankYouSection" style="display: none;">
+                    <div class="thank-you-content">
+                        <div class="thank-you-icon">✓</div>
+                        <h1>Thank You!</h1>
+                        <p>Your form has been successfully submitted.</p>
+                        <p>We will review your requirements and get back to you soon.</p>
+                    </div>
+                </div>
+
+                <!-- Section 1: Project Basics -->
+                <div class="form-section active" id="project-basics">
+                    <div class="section-header">
+                        <h2>1. Project Basics</h2>
+                        <span class="section-toggle">▼</span>
+                    </div>
+                    <div class="section-content">
+                    <!-- Section 1: Project Requirement & Planning -->
+                <div class="section">
+                    <div class="form-group">
+                        <label class="required">Project Type</label>
+                        <select name="projectType" required>
+                            <option value="">Select project type</option>
+                            <option value="new">New Website</option>
+                            <option value="redesign">Website Redesign</option>
+                            <option value="portfolio">Portfolio</option>
+                            <option value="blog">Blog</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div class="error-message">Please select project type</div>
+                    </div>
+                    <div class="form-group conditional-field" id="otherProjectType">
+                        <label>Please specify your project type</label>
+                        <input type="text" name="otherProjectTypeInput" placeholder="e.g. - Landing Page, etc.">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="required">Business Type / Category</label>
+                        <select name="businessCategory" required>
+                            <option value="">Select business category</option>
+                            <option value="retail">Retail & E-commerce</option>
+                            <option value="healthcare">Healthcare & Medical</option>
+                            <option value="education">Education & Training</option>
+                            <option value="technology">Technology & IT Services</option>
+                            <option value="restaurant">Restaurant & Food Services</option>
+                            <option value="realestate">Real Estate & Construction</option>
+                            <option value="consulting">Consulting & Professional Services</option>
+                            <option value="manufacturing">Manufacturing & Industrial</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div class="error-message">Please select business category</div>
+                    </div>
+                    <div class="form-group conditional-field" id="otherBusinessCategory">
+                        <label>Please specify your business category</label>
+                        <input type="text" name="otherBusinessCategoryInput" placeholder="e.g. - Financial Services, etc.">
+                    </div>
+                    <div class="form-group">
+                        <label>Project Description</label>
+                        <textarea name="projectDescription" placeholder="Describe your project goals and requirements..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="required">Target Launch Date</label>
+                        <input type="date" name="launchDate" required>
+                        <div class="error-message">Please select target launch date</div>
+                    </div>
+                </div>
+                        <div class="section-navigation">
+                            <button type="button" class="nav-btn nav-btn-prev" disabled>← Previous</button>
+                            <button type="button" class="nav-btn nav-btn-next" data-next="technical">Next →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Technical Setup -->
+                <div class="form-section" id="technical">
+                    <div class="section-header">
+                        <h2>2. Technical Setup</h2>
+                        <span class="section-toggle">▼</span>
+                    </div>
+                    <div class="section-content">
+                    <!-- Section 2: Platform Selection -->
+                <div class="section">
+                    <h2>2. Platform Selection</h2>
+                    <div class="form-group">
+                        <label class="required">Preferred Platform</label>
+                        <select name="platform" required>
+                            <option value="">Select platform</option>
+                            <option value="wordpress">WordPress</option>
+                            <option value="shopify">Shopify</option>
+                            <option value="wix">Wix</option>
+                            <option value="squarespace">Squarespace</option>
+                            <option value="custom">Custom Development</option>
+                            <option value="unsure">Not Sure - Need Recommendation</option>
+                        </select>
+                        <div class="error-message">Please select preferred platform</div>
+                    </div>
+                    <div class="conditional-field" id="shopifyDetails">
+                        <div class="form-group">
+                            <label>Do you have a Shopify account?</label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="hasShopifyAccount" value="yes"> Yes
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="hasShopifyAccount" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+                        <div class="conditional-field" id="shopifyLoginDetails">
+                            <div class="row">
+                                <div class="form-group">
+                                    <label>Shopify Email</label>
+                                    <input type="email" name="shopifyEmail" placeholder="your@shopify.com">
+                                </div>
+                                <div class="form-group">
+                                    <label>Shopify Password</label>
+                                    <div class="password-wrapper">
+                                        <input type="password" name="shopifyPassword" placeholder="Shopify account password" id="shopifyPassword">
+                                        <button type="button" class="password-toggle" onclick="togglePassword('shopifyPassword')">👁️</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Domain & Hosting -->
+                <div class="section">
+                    <h2>3. Domain & Hosting</h2>
+                    <div class="form-group">
+                        <label class="required">Do you have a domain?</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="hasDomain" value="yes" required> Yes
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="hasDomain" value="no" required> No
+                            </label>
+                        </div>
+                        <div class="error-message">Please select an option</div>
+                    </div>
+                    <div class="conditional-field" id="domainYes">
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="required">Domain Name</label>
+                                <input type="text" name="domainName" placeholder="example.com">
+                                <div class="error-message">Please enter domain name</div>
+                            </div>
+                            <div class="form-group">
+                                <label>Domain Provider</label>
+                                <input type="text" name="domainProvider" placeholder="e.g., GoDaddy, Namecheap">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Do you have login access?</label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="domainLogin" value="yes"> Yes
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="domainLogin" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+                        <div class="conditional-field" id="domainLoginDetails">
+                            <div class="row">
+                                <div class="form-group">
+                                    <label>Username/Email</label>
+                                    <input type="text" name="domainUsername" placeholder="Login username or email">
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <div class="password-wrapper">
+                                        <input type="password" name="domainPassword" placeholder="Login password" id="domainPassword">
+                                        <button type="button" class="password-toggle" onclick="togglePassword('domainPassword')">👁️</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="conditional-field" id="domainNo">
+                        <div class="form-group">
+                            <label class="required">Preferred Domain Name</label>
+                            <input type="text" name="preferredDomain" placeholder="example.com">
+                            <div class="error-message">Please enter preferred domain name</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Domain Purchase Service</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="domainPurchaseService" value="yes">
+                                    <span style="font-weight: 600; color: #28a745;">✓ We can purchase domain for you</span>
+                                </label>
+                            </div>
+                            <small style="color: #6c757d; margin-top: 5px; display: block;">We'll help you register the domain and handle all technical setup</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 30px;">
+                        <label class="required">Do you have hosting?</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="hasHosting" value="yes" required> Yes
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="hasHosting" value="no" required> No
+                            </label>
+                        </div>
+                        <div class="error-message">Please select an option</div>
+                    </div>
+                    <div class="conditional-field" id="hostingYes">
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="required">Hosting Provider</label>
+                                <input type="text" name="hostingProvider" placeholder="e.g., Bluehost, SiteGround">
+                                <div class="error-message">Please enter hosting provider</div>
+                            </div>
+                            <div class="form-group">
+                                <label>Hosting Plan</label>
+                                <input type="text" name="hostingPlan" placeholder="e.g., Shared, VPS, Dedicated">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Do you have login access?</label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="hostingLogin" value="yes"> Yes
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="hostingLogin" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+                        <div class="conditional-field" id="hostingLoginDetails">
+                            <div class="row">
+                                <div class="form-group">
+                                    <label>Username/Email</label>
+                                    <input type="text" name="hostingUsername" placeholder="Login username or email">
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <div class="password-wrapper">
+                                        <input type="password" name="hostingPassword" placeholder="Login password" id="hostingPassword">
+                                        <button type="button" class="password-toggle" onclick="togglePassword('hostingPassword')">👁️</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="conditional-field" id="hostingNo">
+                        <div class="form-group">
+                            <label>Hosting Preference</label>
+                            <select name="hostingPreference">
+                                <option value="">Select preference</option>
+                                <option value="shared">Shared Hosting</option>
+                                <option value="vps">VPS Hosting</option>
+                                <option value="dedicated">Dedicated Server</option>
+                                <option value="cloud">Cloud Hosting</option>
+                                <option value="unsure">Not Sure - Need Recommendation</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Hosting Purchase Service</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="hostingPurchaseService" value="yes">
+                                    <span style="font-weight: 600; color: #28a745;">✓ We can purchase hosting for you</span>
+                                </label>
+                            </div>
+                            <small style="color: #6c757d; margin-top: 5px; display: block;">We'll help you choose the right hosting plan and handle all setup</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 4: Theme / Design -->
+                <div class="section">
+                    <h2>4. Theme / Design</h2>
+                    <div class="form-group">
+                        <label class="required">Do you have a theme/design preference?</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="hasTheme" value="yes" required> Yes
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="hasTheme" value="no" required> No
+                            </label>
+                        </div>
+                        <div class="error-message">Please select an option</div>
+                    </div>
+                    <div class="conditional-field" id="themeYes">
+                        <div class="form-group">
+                            <label class="required">Theme Name or URL</label>
+                            <input type="text" name="themeName" placeholder="Theme name or link to theme">
+                            <div class="error-message">Please enter theme name or URL</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Theme Provider</label>
+                            <input type="text" name="themeProvider" placeholder="e.g., ThemeForest, WordPress.org">
+                        </div>
+                        <div class="form-group">
+                            <label>Do you have the theme license/purchase?</label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="themeLicense" value="yes"> Yes
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="themeLicense" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="conditional-field" id="themeNo">
+                        <div class="form-group">
+                            <label>Design Style Preference</label>
+                            <select name="designStyle">
+                                <option value="">Select style</option>
+                                <option value="minimal">Minimal & Clean</option>
+                                <option value="modern">Modern & Bold</option>
+                                <option value="classic">Classic & Professional</option>
+                                <option value="creative">Creative & Artistic</option>
+                                <option value="corporate">Corporate & Formal</option>
+                                <option value="playful">Playful & Fun</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Favorite Websites for Inspiration</label>
+                            <textarea name="inspirationSites" placeholder="Share URLs of websites you like..."></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Color Preferences</label>
+                        <div class="color-picker-wrapper">
+                            <input type="color" id="colorPicker" value="#667eea">
+                            <input type="text" name="colorPreferences" id="colorInput" placeholder="Select a color or enter hex code">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 5: Website Structure -->
+                <div class="section">
+                    <h2>5. Website Structure <span id="pageCountBadge" class="page-count-badge">Total: 0 pages</span></h2>
+                    <div class="form-group">
+                        <label class="required">Header Pages (Main Navigation)</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="headerPages" value="home" checked> Home
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="headerPages" value="about" checked> About
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="headerPages" value="services" checked> Services
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="headerPages" value="contact" checked> Contact
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="headerPages" value="testimonial"> Testimonial
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="headerPages" value="blog"> Blog
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="headerPages" value="faq"> FAQ
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="headerPages" value="shop"> Shop
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="headerPages" value="gallery"> Gallery
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="required">Footer Pages (Footer Links)</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="footerPages" value="privacy"> Privacy Policy
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="footerPages" value="terms"> Terms & Conditions
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="footerPages" value="shipping"> Shipping Policy
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="footerPages" value="refund"> Refund Policy
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Additional Pages</label>
+                        <div id="additionalPages"></div>
+                        <button type="button" class="btn btn-add" id="addPageBtn">+ Add More Pages</button>
+                    </div>
+
+                <!-- Custom Features & Forms -->
+                <div class="section">
+                    <h2>Custom Features & Forms</h2>
+                    <div class="form-group">
+                        <label>Required Custom Features</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="customFeatures" value="contact"> Contact Form
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="customFeatures" value="newsletter"> Newsletter Signup
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="customFeatures" value="booking"> Booking System
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="customFeatures" value="chat"> Live Chat
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="customFeatures" value="whatsapp"> WhatsApp Integration
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="customFeatures" value="facebook-pixel"> Facebook Pixel
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="customFeatures" value="analytics"> Analytics
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="customFeatures" value="multilingual"> Multi-language Support
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="customFeatures" value="search"> Advanced Search
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="customFeatures" value="seo"> SEO Optimization
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="customFeatures" value="social-media"> Social Media Integration
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="customFeatures" value="email-marketing"> Email Marketing Integration
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="customFeatures" value="crm"> CRM Integration
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="customFeatures" value="payment-gateway"> Payment Gateway Integration
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="customFeatures" value="api-integration"> API Integration
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="customFeatures" value="webhook-integration"> Webhook Integration
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="customFeatures" value="notification-system"> Notification System
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Other Custom Features</label>
+                        <textarea name="otherFeatures" placeholder="Describe any other custom features you need..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Third-party Integrations Needed</label>
+                        <textarea name="integrations" placeholder="e.g., CRM, Email marketing tools, Payment gateways..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Form Requirements</label>
+                        <textarea name="formRequirements" placeholder="Describe what forms you need and their fields (e.g., Contact form with name, email, message; Quote request form with product selection...)"></textarea>
+                    </div>
+                </div>
+
+                    <div class="form-group">
+                        <label>Navigation Structure (Drag to reorder)</label>
+                        <div id="navigationList" class="navigation-list"></div>
+                        <input type="hidden" name="navigationStructure" id="navigationStructureInput">
+                    </div>
+                </div>
+
+                                        <div class="section-navigation">
+                            <button type="button" class="nav-btn nav-btn-prev" data-prev="project-basics">← Previous</button>
+                            <button type="button" class="nav-btn nav-btn-next" data-next="content">Next →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Content & Legal -->
+                <div class="form-section" id="content">
+                    <div class="section-header">
+                        <h2>3. Content & Branding</h2>
+                        <span class="section-toggle">▼</span>
+                    </div>
+                    <div class="section-content">
+                    
+                    <!-- Section 6: Branding -->
+                <div class="section">
+                    <h2>6. Branding</h2>
+                    <div class="form-group">
+                        <label class="required">Company/Business Name</label>
+                        <input type="text" name="companyName" required>
+                        <div class="error-message">Please enter company name</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-option" style="display: flex; align-items: center; gap: 8px; font-weight: 500; cursor: pointer;">
+                            <input type="checkbox" id="addCompanyDetails" name="addCompanyDetails" value="yes" style="width: auto; margin: 0;">
+                            Do you want to add Company details on website?
+                        </label>
+                    </div>
+
+                    <div id="companyDetailsSection" class="conditional-field">
+                        <div class="form-group">
+                            <label>Company Code</label>
+                            <input type="text" name="companyCode" placeholder="e.g., CMP-001">
+                        </div>
+                        <div class="form-group">
+                            <label>GST / VAT Number</label>
+                            <input type="text" name="gstNumber" placeholder="e.g., 27AABCU9603R1ZX">
+                        </div>
+                        <div class="form-group">
+                            <label>Business Registration Number</label>
+                            <input type="text" name="registrationNumber" placeholder="e.g., CIN: U72200MH2021PTC123456">
+                        </div>
+                        <div class="form-group">
+                            <label>Bank Account Number / IBAN</label>
+                            <input type="text" name="bankAccount" placeholder="e.g., 12345678901234">
+                        </div>
+                        <div class="form-group">
+                            <label>Bank Name</label>
+                            <input type="text" name="bankName" placeholder="e.g., State Bank of India">
+                        </div>
+                        <div class="form-group">
+                            <label>IFSC / SWIFT Code</label>
+                            <input type="text" name="ifscCode" placeholder="e.g., SBIN0001234 or SBININBBXXX">
+                        </div>
+                        <div class="form-group">
+                            <label>Company Address</label>
+                            <textarea name="companyAddress" placeholder="Enter complete company address..." rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>City</label>
+                            <input type="text" name="city" placeholder="e.g., Mumbai">
+                        </div>
+                        <div class="form-group">
+                            <label>State</label>
+                            <input type="text" name="state" placeholder="e.g., Maharashtra">
+                        </div>
+                        <div class="form-group">
+                            <label>Country</label>
+                            <input type="text" name="country" placeholder="e.g., India">
+                        </div>
+                        <div class="form-group">
+                            <label>Pincode</label>
+                            <input type="text" name="pincode" placeholder="e.g., 400001">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tagline/Slogan</label>
+                        <input type="text" name="tagline" placeholder="Your business tagline">
+                    </div>
+                    <div class="form-group">
+                        <label>Do you have a logo?</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="hasLogo" value="yes"> Yes - I have logo
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="hasLogo" value="no"> No - I need logo design
+                            </label>
+                        </div>
+                    </div>
+                    <div class="conditional-field" id="logoYes">
+                        <div class="form-group">
+                            <label>Logo File (Google Drive Link)</label>
+                            <input type="url" name="logoLink" placeholder="https://drive.google.com/...">
+                            <small style="color: #6c757d; margin-top: 5px; display: block;">Share the Google Drive link containing your logo file</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Or Upload Logo File</label>
+                            <div class="file-upload">
+                                <input type="file" name="logoFile" accept="image/*" class="file-input">
+                                <span class="file-name">No file selected</span>
+                                <small style="color: #6c757d; margin-top: 5px; display: block;">Upload logo file directly (JPG, PNG, GIF)</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="conditional-field" id="logoNo">
+                        <div class="form-group">
+                            <label>Logo Size (Dimensions)</label>
+                            <input type="text" name="logoSize" placeholder="e.g., 1724 x 363, 500 x 500">
+                            <small style="color: #6c757d; margin-top: 5px; display: block;">Specify desired logo dimensions (width x height in pixels)</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Logo Colors & Symbols</label>
+                            <textarea name="logoColors" placeholder="Describe preferred colors, symbols, or design elements for your logo..." rows="3"></textarea>
+                            <small style="color: #6c757d; margin-top: 5px; display: block;">Mention specific colors, symbols, icons, or design elements you want in your logo</small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Brand Guidelines</label>
+                        <textarea name="brandGuidelines" placeholder="Share any brand guidelines, style guides, or brand assets..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Brand Voice/Tone</label>
+                        <select name="brandVoice">
+                            <option value="">Select brand voice</option>
+                            <option value="professional">Professional</option>
+                            <option value="friendly">Friendly & Casual</option>
+                            <option value="formal">Formal</option>
+                            <option value="playful">Playful</option>
+                            <option value="luxury">Luxury & Premium</option>
+                        </select>
+                    </div>
+                </div>
+                    
+                    <!-- Section 7: Content Collection -->
+                <div class="section">
+                    <h2>7. Content Collection</h2>
+                    <div class="form-group">
+                        <label>Do you have content ready?</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="contentReady" value="yes"> Yes
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="contentReady" value="partial"> Partially
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="contentReady" value="no"> No - Need help
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group conditional-field" id="contentFieldsContainer">
+                        <label>Page Content (Based on selected pages in Website Structure)</label>
+                        <!-- Page Content Tabs -->
+                        <div id="pageContentTabs" class="page-content-tabs"></div>
+                        <!-- Page Content Container -->
+                        <div id="dynamicContentFields" class="page-content-container"></div>
+                    </div>
+                </div>
+                        <div class="section-navigation">
+                            <button type="button" class="nav-btn nav-btn-prev" data-prev="technical">← Previous</button>
+                            <button type="button" class="nav-btn nav-btn-next" data-next="products">Next →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 4: Products & Features -->
+                <div class="form-section" id="products">
+                    <div class="section-header">
+                        <h2>4. Products & Features</h2>
+                        <span class="section-toggle">▼</span>
+                    </div>
+                    <div class="section-content">
+                    <!-- Section 8: Products / Services -->
+                <div class="section">
+                    <h2>8. Products / Services</h2>
+                    <div class="form-group">
+                        <label>Do you sell products or services?</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="sellType" value="products"> Products
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="sellType" value="services"> Services
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="sellType" value="both"> Both
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="sellType" value="none"> None
+                            </label>
+                        </div>
+                    </div>
+                    <div id="productsSection" class="conditional-field">
+                        <div class="form-group">
+                            <label>Product List Google Drive Link</label>
+                            <input type="url" name="productDriveLink" placeholder="https://drive.google.com/...">
+                            <small style="color: #6c757d; margin-top: 5px; display: block;">Share the Google Drive link containing your complete product list with details</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Product Categories</label>
+                            <textarea name="productCategories" placeholder="List all product categories (e.g., Electronics, Clothing, Accessories...)"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Product Images Google Drive Link</label>
+                            <input type="url" name="productImagesLink" placeholder="https://drive.google.com/...">
+                            <small style="color: #6c757d; margin-top: 5px; display: block;">Share the Google Drive link containing all product images</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Filter Attributes (for product filtering)</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="filterAttributes" value="size"> Size
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="filterAttributes" value="color"> Color
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="filterAttributes" value="material"> Material
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="filterAttributes" value="brand"> Brand
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="filterAttributes" value="price"> Price Range
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="filterAttributes" value="category"> Category
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="filterAttributes" value="rating"> Rating
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="filterAttributes" value="availability"> Availability
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="filterAttributes" value="weight"> Weight
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="filterAttributes" value="dimensions"> Dimensions
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="servicesSection" class="conditional-field">
+                        <div class="form-group">
+                            <label>Service List Google Drive Link</label>
+                            <input type="url" name="serviceDriveLink" placeholder="https://drive.google.com/...">
+                            <small style="color: #6c757d; margin-top: 5px; display: block;">Share the Google Drive link containing your complete service list with details</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Service Categories</label>
+                            <textarea name="serviceCategories" placeholder="List all service categories (e.g., Web Development, Consulting, Design...)"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Service Portfolio/Work Samples Google Drive Link</label>
+                            <input type="url" name="servicePortfolioLink" placeholder="https://drive.google.com/...">
+                            <small style="color: #6c757d; margin-top: 5px; display: block;">Share the Google Drive link containing your portfolio or work samples</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Service Pricing Details</label>
+                            <textarea name="servicePricing" placeholder="Describe your pricing structure (e.g., hourly rates, project-based pricing, packages...)"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Upload Service Details (PDF, Word, Excel)</label>
+                            <input type="file" name="serviceDetailsFile" accept=".pdf,.doc,.docx,.xlsx,.xls">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 10: Ecommerce Setup -->
+                <div class="section">
+                    <h2>9. Ecommerce Setup</h2>
+                    <div class="form-group">
+                        <label class="required">Is this an e-commerce website?</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="isEcommerce" value="yes" required> Yes
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="isEcommerce" value="no" required> No
+                            </label>
+                        </div>
+                        <div class="error-message">Please select an option</div>
+                    </div>
+                    <div class="conditional-field" id="ecommerceYes">
+                        <div class="form-group">
+                            <label class="required">Payment Methods (Select all that apply)</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="paymentMethods" value="razorpay"> Razorpay
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="paymentMethods" value="stripe"> Stripe
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="paymentMethods" value="paypal"> PayPal
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="paymentMethods" value="cod"> Cash on Delivery
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="paymentMethods" value="other"> Other
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="conditional-field" id="razorpayDetails">
+                            <div class="form-group">
+                                <label>Razorpay Key ID</label>
+                                <input type="text" name="razorpayKeyId" placeholder="Your Razorpay Key ID">
+                            </div>
+                        </div>
+                        
+                        <div class="conditional-field" id="stripeDetails">
+                            <div class="form-group">
+                                <label>Stripe Publishable Key</label>
+                                <input type="text" name="stripeKey" placeholder="Your Stripe Publishable Key">
+                            </div>
+                        </div>
+                        
+                        <div class="conditional-field" id="paypalDetails">
+                            <div class="form-group">
+                                <label>PayPal Email</label>
+                                <input type="email" name="paypalEmail" placeholder="Your PayPal business email">
+                            </div>
+                        </div>
+                        
+                        <div class="conditional-field" id="otherPaymentDetails">
+                            <div class="form-group">
+                                <label>Other Payment Method Details</label>
+                                <input type="text" name="otherPaymentMethod" placeholder="Specify other payment method">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="required">Currencies Accepted</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="currencies" value="USD"> USD ($)
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="currencies" value="EUR"> EUR (€)
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="currencies" value="GBP"> GBP (£)
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="currencies" value="INR"> INR (₹)
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="currencies" value="other"> Other
+                                </label>
+                            </div>
+                        </div>
+                        <div class="conditional-field" id="otherCurrency">
+                            <div class="form-group">
+                                <label>Other Currency</label>
+                                <input type="text" name="otherCurrencyText" placeholder="Specify currency">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="required">Tax Region</label>
+                            <input type="text" name="taxRegion" placeholder="e.g., US, UK, India, or specific state">
+                            <div class="error-message">Please enter tax region</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Tax Rate (%)</label>
+                            <input type="number" name="taxRate" placeholder="e.g., 18" step="0.01">
+                            <div class="error-message">Please enter tax rate</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="required">Shipping Type</label>
+                            <select name="shippingType">
+                                <option value="">Select shipping type</option>
+                                <option value="free">Free Shipping</option>
+                                <option value="flat">Flat Rate</option>
+                                <option value="weight">Weight-based</option>
+                                <option value="realtime">Real-time Carrier Rates</option>
+                            </select>
+                            <div class="error-message">Please select shipping type</div>
+                        </div>
+
+                        <div class="conditional-field" id="flatRateDetails">
+                            <div class="form-group">
+                                <label>Flat Shipping Rate</label>
+                                <input type="number" name="flatRate" placeholder="Amount" step="0.01">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="required">Shipping Zones</label>
+                            <textarea name="shippingZones" placeholder="List shipping zones (e.g., North India, South India, International...)"></textarea>
+                            <div class="error-message">Please enter shipping zones</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Shipping Rates (per zone)</label>
+                            <textarea name="shippingRates" placeholder="Specify shipping rates for each zone (e.g., North India: ₹50, South India: ₹60, International: ₹500...)"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Delivery Timeframes</label>
+                            <textarea name="deliveryTimeframes" placeholder="Specify delivery time for each zone (e.g., North India: 2-3 days, South India: 3-4 days, International: 7-10 days...)"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="required">Inventory Type</label>
+                            <select name="inventoryType">
+                                <option value="">Select inventory type</option>
+                                <option value="manual">Manual Tracking</option>
+                                <option value="automatic">Automatic Tracking</option>
+                                <option value="none">No Inventory Tracking</option>
+                            </select>
+                            <div class="error-message">Please select inventory type</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Return Policy</label>
+                            <textarea name="returnPolicy" placeholder="Describe your return policy..."></textarea>
+                        </div>
+                    </div>
+                </div>
+                        <div class="section-navigation">
+                            <button type="button" class="nav-btn nav-btn-prev" data-prev="content">← Previous</button>
+                            <button type="button" class="nav-btn nav-btn-next" data-next="marketing">Next →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 5: Marketing & SEO -->
+                <div class="form-section" id="marketing">
+                    <div class="section-header">
+                        <h2>5. Marketing & SEO</h2>
+                        <span class="section-toggle">▼</span>
+                    </div>
+                    <div class="section-content">
+                    <!-- Section 12: SEO -->
+                <div class="section">
+                    <h2>10. SEO</h2>
+                    <div class="form-group">
+                        <label>Business Description</label>
+                        <textarea name="businessDescription" placeholder="Brief description of your business for SEO..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Target Keywords</label>
+                        <textarea name="keywords" placeholder="List keywords separated by commas..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Competitor Websites</label>
+                        <textarea name="competitors" placeholder="List competitor website URLs..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Google Analytics</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="hasAnalytics" value="yes"> Have tracking code
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="hasAnalytics" value="no"> Need setup
+                            </label>
+                        </div>
+                    </div>
+                    <div class="conditional-field" id="analyticsYes">
+                        <div class="form-group">
+                            <label>Google Analytics Tracking ID</label>
+                            <input type="text" name="analyticsId" placeholder="e.g., UA-XXXXX-Y or G-XXXXX">
+                        </div>
+                    </div>
+                    <div class="conditional-field" id="analyticsSetup">
+                        <div class="row">
+                            <div class="form-group">
+                                <label>Google Account Email</label>
+                                <input type="email" name="gaEmail" placeholder="your@gmail.com">
+                            </div>
+                            <div class="form-group">
+                                <label>Google Account Password</label>
+                                <div class="password-wrapper">
+                                    <input type="password" name="gaPassword" placeholder="Google account password" id="gaPassword">
+                                    <button type="button" class="password-toggle" onclick="togglePassword('gaPassword')">👁️</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Google My Business</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="hasGMB" value="yes"> Already claimed
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="hasGMB" value="no"> Need help
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Media Section -->
+                <div class="section">
+                    <h2>11. Social Media</h2>
+                    <div class="form-group">
+                        <label>Facebook</label>
+                        <input type="url" name="facebookUrl" placeholder="https://facebook.com/yourpage">
+                    </div>
+                    <div class="form-group">
+                        <label>Instagram</label>
+                        <input type="url" name="instagramUrl" placeholder="https://instagram.com/yourhandle">
+                    </div>
+                    <div class="form-group">
+                        <label>Twitter/X</label>
+                        <input type="url" name="twitterUrl" placeholder="https://twitter.com/yourhandle">
+                    </div>
+                    <div class="form-group">
+                        <label>LinkedIn</label>
+                        <input type="url" name="linkedinUrl" placeholder="https://linkedin.com/company/yourcompany">
+                    </div>
+                    <div class="form-group">
+                        <label>YouTube</label>
+                        <input type="url" name="youtubeUrl" placeholder="https://youtube.com/yourchannel">
+                    </div>
+                    <div class="form-group">
+                        <label>Pinterest</label>
+                        <input type="url" name="pinterestUrl" placeholder="https://pinterest.com/yourhandle">
+                    </div>
+                    <div class="form-group">
+                        <label>TikTok</label>
+                        <input type="url" name="tiktokUrl" placeholder="https://tiktok.com/@yourhandle">
+                    </div>
+                    <div class="form-group">
+                        <label>Other Social Media</label>
+                        <textarea name="otherSocialMedia" placeholder="Any other social media platforms with URLs..."></textarea>
+                    </div>
+                </div>
+
+                        <div class="section-navigation">
+                            <button type="button" class="nav-btn nav-btn-prev" data-prev="products">← Previous</button>
+                            <button type="button" class="nav-btn nav-btn-next" data-next="final">Next →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 6: Final Details -->
+                <div class="form-section" id="final">
+                    <div class="section-header">
+                        <h2>6. Final Details</h2>
+                        <span class="section-toggle">▼</span>
+                    </div>
+                    <div class="section-content">
+                    <!-- Section 13: Final Details -->
+                <div class="section">
+                    <h2>12. Final Details</h2>
+                    <div class="form-group">
+                        <label class="required">Contact Person Name</label>
+                        <input type="text" name="contactName" required>
+                        <div class="error-message">Please enter contact name</div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="required">Email Address</label>
+                            <input type="email" name="contactEmail" required>
+                            <div class="error-message">Please enter valid email</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Phone Number</label>
+                            <input type="tel" name="contactPhone" required>
+                            <div class="error-message">Please enter phone number</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="required">Business Email</label>
+                        <input type="email" name="businessEmail" required placeholder="info@yourcompany.com">
+                        <div class="error-message">Please enter business email</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Business Address</label>
+                        <textarea name="businessAddress" placeholder="Full business address..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Additional Notes or Requirements</label>
+                        <textarea name="additionalNotes" placeholder="Any other information you'd like to share..."></textarea>
+                    </div>
+                        <div class="section-navigation">
+                            <button type="button" class="nav-btn nav-btn-prev" data-prev="marketing">← Previous</button>
+                            <button type="submit" class="nav-btn nav-btn-next">Submit Form</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Loader Overlay -->
+    <div class="loader-overlay" id="loaderOverlay">
+        <div class="loader"></div>
+        <div class="loader-text">Submitting your form...</div>
+    </div>
+
+    <!-- Auto-Save Indicator -->
+    <div class="auto-save-indicator" id="autoSaveIndicator">✓ Auto-saved</div>
+
+    <script>
+        // ============================================
+        // AUTO-SAVE FEATURE
+        // ============================================
+        const STORAGE_KEY = 'clientFormData';
+        const CLIENT_ID_KEY = 'generatedClientId';
+        let saveTimeout;
+
+        // Generate unique client ID
+        function generateClientId() {
+            const existingId = localStorage.getItem(CLIENT_ID_KEY);
+            console.log('Existing client ID from localStorage:', existingId);
+            
+            if (existingId) {
+                console.log('Using existing client ID:', existingId);
+                return existingId;
+            }
+
+            const year = new Date().getFullYear();
+            const randomNum = Math.floor(Math.random() * 9999) + 1;
+            const clientId = `CL-${year}-${randomNum.toString().padStart(4, '0')}`;
+            
+            console.log('Generated new client ID:', clientId);
+            localStorage.setItem(CLIENT_ID_KEY, clientId);
+            return clientId;
+        }
+
+        function saveFormData() {
+            const form = document.getElementById('requirementForm');
+            const formData = new FormData(form);
+            const data = {};
+
+            // Add client ID to data
+            const clientId = generateClientId();
+            data.client_id = clientId;
+            console.log('Form submission - Client ID added:', clientId);
+
+            // Handle regular form fields
+            formData.forEach((value, key) => {
+                if (data[key]) {
+                    if (Array.isArray(data[key])) {
+                        data[key].push(value);
+                    } else {
+                        data[key] = [data[key], value];
+                    }
+                } else {
+                    data[key] = value;
+                }
+            });
+
+            // Handle checkboxes separately
+            const checkboxes = form.querySelectorAll('input[type="checkbox"]:checked');
+            checkboxes.forEach(checkbox => {
+                if (data[checkbox.name]) {
+                    if (Array.isArray(data[checkbox.name])) {
+                        data[checkbox.name].push(checkbox.value);
+                    } else {
+                        data[checkbox.name] = [data[checkbox.name], checkbox.value];
+                    }
+                } else {
+                    data[checkbox.name] = checkbox.value;
+                }
+            });
+
+            // Handle radio buttons
+            const radioGroups = {};
+            const radios = form.querySelectorAll('input[type="radio"]:checked');
+            radios.forEach(radio => {
+                radioGroups[radio.name] = radio.value;
+            });
+
+            // Merge radio data
+            Object.assign(data, radioGroups);
+
+            // Add timestamp
+            data.timestamp = new Date().toISOString();
+
+            // Save to localStorage
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+            
+            // Show auto-save indicator
+            showAutoSaveIndicator();
+        }
+
+        function loadFormData() {
+            const savedData = localStorage.getItem(STORAGE_KEY);
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                const form = document.getElementById('requirementForm');
+
+                // Restore regular form fields
+                Object.keys(data).forEach(key => {
+                    if (key === 'client_id' || key === 'timestamp') return; // Skip metadata
+                    if (key === 'hasDomain' || key === 'hasHosting' || key === 'hasLogo' || key === 'isEcommerce') return; // Skip domain/hosting/logo/ecommerce to prevent default selection
+                    
+                    const value = data[key];
+                    const field = form.querySelector(`[name="${key}"]`);
+                    
+                    if (field) {
+                        if (field.type === 'radio') {
+                            const radio = form.querySelector(`[name="${key}"][value="${value}"]`);
+                            if (radio) radio.checked = true;
+                        } else if (field.type === 'checkbox') {
+                            if (Array.isArray(value)) {
+                                value.forEach(val => {
+                                    const checkbox = form.querySelector(`[name="${key}"][value="${val}"]`);
+                                    if (checkbox) checkbox.checked = true;
+                                });
+                            } else {
+                                const checkbox = form.querySelector(`[name="${key}"][value="${value}"]`);
+                                if (checkbox) checkbox.checked = true;
+                            }
+                        } else if (field.type === 'file') {
+                            // Skip file inputs
+                            return;
+                        } else {
+                            field.value = value;
+                        }
+                    }
+                });
+
+                // Trigger change events to update conditional fields
+                const inputs = form.querySelectorAll('input, select, textarea');
+                inputs.forEach(input => {
+                    input.dispatchEvent(new Event('change'));
+                });
+
+                // Update dynamic content fields
+                updateDynamicContentFields();
+                updateNavigationList();
+                updatePageCount();
+            }
+        }
+
+        function clearSavedData() {
+            if (confirm('Are you sure you want to clear all saved form data?')) {
+                localStorage.removeItem(STORAGE_KEY);
+                localStorage.removeItem(CLIENT_ID_KEY);
+                location.reload();
+            }
+        }
+
+        function debouncedSave() {
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(saveFormData, 1000);
+        }
+
+        function showAutoSaveIndicator() {
+            const indicator = document.createElement('div');
+            indicator.className = 'auto-save-indicator show';
+            indicator.textContent = 'Auto-saved';
+            document.body.appendChild(indicator);
+
+            setTimeout(() => {
+                indicator.classList.remove('show');
+                setTimeout(() => {
+                    if (document.body.contains(indicator)) {
+                        document.body.removeChild(indicator);
+                    }
+                }, 300);
+            }, 2000);
+            autoSaveTimeout = setTimeout(saveFormData, AUTO_SAVE_DELAY);
+        }
+
+        // ============================================
+        // GLOBAL FUNCTIONS
+        // ============================================
+        // Global function for adding page to checkbox group
+        function addPageToCheckboxGroup(btn) {
+            const pageDiv = btn.closest('.dynamic-item');
+            const pageNameInput = pageDiv.querySelector('input[name^="additionalPageName_"]');
+            const pageTypeSelect = pageDiv.querySelector('select[name^="additionalPageType_"]');
+            const pageName = pageNameInput.value.trim();
+            const pageType = pageTypeSelect ? pageTypeSelect.value : 'header';
+
+            const checkboxGroup = document.querySelector(`input[name="${pageType}Pages"]`).closest('.checkbox-group');
+            const existingCheckbox = checkboxGroup.querySelector(`input[value="${pageName.toLowerCase().replace(/\s+/g, '-')}"]`);
+
+            if (pageName && !existingCheckbox) {
+                const checkboxLabel = document.createElement('label');
+                checkboxLabel.className = 'checkbox-option';
+                checkboxLabel.innerHTML = `
+                    <input type="checkbox" name="${pageType}Pages" value="${pageName.toLowerCase().replace(/\s+/g, '-')}" checked> ${pageName}
+                `;
+                checkboxGroup.appendChild(checkboxLabel);
+
+                // Add event listener to the new checkbox
+                const newCheckbox = checkboxLabel.querySelector('input');
+                newCheckbox.addEventListener('change', function() {
+                    updateDynamicContentFields();
+                    updateNavigationList();
+                    updatePageCount();
+                });
+
+                updateDynamicContentFields();
+                updateNavigationList();
+                updatePageCount();
+                btn.textContent = 'Added ✓';
+                btn.disabled = true;
+            } else if (!pageName) {
+                alert('Please enter a page name first');
+            } else {
+                alert('This page already exists in Website Structure');
+            }
+        }
+
+        // Global function for updating page count badge
+        function updatePageCount() {
+            const headerPagesCheckboxes = document.querySelectorAll('input[name="headerPages"]:checked');
+            const footerPagesCheckboxes = document.querySelectorAll('input[name="footerPages"]:checked');
+            const totalCount = headerPagesCheckboxes.length + footerPagesCheckboxes.length;
+            const badge = document.getElementById('pageCountBadge');
+            if (badge) {
+                badge.textContent = `(${totalCount} page${totalCount !== 1 ? 's' : ''})`;
+            }
+        }
+
+        // Global function for updating dynamic content fields with TAB UI
+        function updateDynamicContentFields() {
+            const dynamicContentFields = document.getElementById('dynamicContentFields');
+            const pageContentTabs = document.getElementById('pageContentTabs');
+            const headerPagesCheckboxes = document.querySelectorAll('input[name="headerPages"]');
+            const footerPagesCheckboxes = document.querySelectorAll('input[name="footerPages"]');
+
+            // Clear existing fields
+            dynamicContentFields.innerHTML = '';
+            pageContentTabs.innerHTML = '';
+
+            // Get all selected pages
+            const selectedPages = [];
+            headerPagesCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selectedPages.push({
+                        value: checkbox.value,
+                        label: checkbox.parentElement.textContent.trim()
+                    });
+                }
+            });
+            footerPagesCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selectedPages.push({
+                        value: checkbox.value,
+                        label: checkbox.parentElement.textContent.trim()
+                    });
+                }
+            });
+
+            // If no pages selected, show message
+            if (selectedPages.length === 0) {
+                dynamicContentFields.innerHTML = '<p style="color: #6c757d; font-style: italic;">Please select pages from Website Structure to add content.</p>';
+                return;
+            }
+
+            // Create tabs
+            selectedPages.forEach((page, index) => {
+                const tabBtn = document.createElement('button');
+                tabBtn.type = 'button';
+                tabBtn.className = 'page-tab-btn' + (index === 0 ? ' active' : '');
+                tabBtn.dataset.page = page.value;
+                tabBtn.innerHTML = `
+                    <span class="tab-label">${page.label}</span>
+                    <span class="tab-tick" style="display: none;">✓</span>
+                `;
+                tabBtn.addEventListener('click', () => switchPageTab(page.value));
+                pageContentTabs.appendChild(tabBtn);
+            });
+
+            // Create content sections for each page
+            selectedPages.forEach((page, index) => {
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'page-content-panel' + (index === 0 ? ' active' : '');
+                contentDiv.dataset.page = page.value;
+
+                // Check if this is the Contact page
+                if (page.value === 'contact') {
+                    contentDiv.innerHTML = getContactFormBuilderHTML(page.label);
+                } else {
+                    contentDiv.innerHTML = getRegularPageContentHTML(page);
+                }
+
+                dynamicContentFields.appendChild(contentDiv);
+            });
+
+            // Initialize contact form builder if contact page exists
+            const contactPanel = document.querySelector('.page-content-panel[data-page="contact"]');
+            if (contactPanel) {
+                initContactFormBuilder();
+            }
+
+            // Add input listeners for completion ticks
+            addPageCompletionListeners();
+        }
+
+        // Function to switch between page tabs
+        function switchPageTab(pageValue) {
+            // Update tab buttons
+            document.querySelectorAll('.page-tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.page === pageValue) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Update content panels
+            document.querySelectorAll('.page-content-panel').forEach(panel => {
+                panel.classList.remove('active');
+                if (panel.dataset.page === pageValue) {
+                    panel.classList.add('active');
+                }
+            });
+        }
+
+        // Function to add completion listeners to page inputs
+        function addPageCompletionListeners() {
+            document.querySelectorAll('.page-input, .contact-form-input, .custom-field-input').forEach(input => {
+                input.addEventListener('input', updatePageCompletionTicks);
+                input.addEventListener('change', updatePageCompletionTicks);
+            });
+        }
+
+        // Function to get regular page content HTML
+        function getRegularPageContentHTML(page) {
+            return `
+                <div class="page-content-header">
+                    <h4>${page.label} Page Content</h4>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label>Page Heading</label>
+                        <input type="text" name="pageHeading_${page.value}" placeholder="Main heading for ${page.label} page" class="page-input" data-page="${page.value}">
+                    </div>
+                    <div class="form-group">
+                        <label>Page Subheading</label>
+                        <input type="text" name="pageSubheading_${page.value}" placeholder="Subheading for ${page.label} page" class="page-input" data-page="${page.value}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Page Content</label>
+                    <textarea name="content_${page.value}" placeholder="Detailed content for ${page.label} page..." rows="6" class="page-input" data-page="${page.value}"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Page Image</label>
+                    <div class="file-upload">
+                        <input type="file" name="pageImage_${page.value}" accept="image/*" class="file-input page-input" data-page="${page.value}">
+                        <span class="file-name">No image selected</span>
+                        <small style="color: #6c757d; margin-top: 5px; display: block;">Upload main image for ${page.label} page (JPG, PNG, GIF)</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Or upload content file (PDF, Excel, Word):</label>
+                    <div class="file-upload">
+                        <input type="file" name="content_${page.value}_file" accept=".pdf,.xlsx,.xls,.doc,.docx" class="file-input page-input" data-page="${page.value}">
+                        <span class="file-name">No file selected</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Function to get Contact Form builder HTML
+        function getContactFormBuilderHTML(pageLabel) {
+            return `
+                <div class="page-content-header">
+                    <h4>${pageLabel} Page - Contact Form Builder</h4>
+                    <p style="color: #6c757d; font-size: 0.9rem; margin-top: 5px;">Configure the contact form fields and settings</p>
+                </div>
+
+                <!-- Form Settings -->
+                <div class="contact-form-section">
+                    <h5 style="color: #2c3e50; margin-bottom: 15px; border-bottom: 2px solid #3498db; padding-bottom: 8px;">Form Settings</h5>
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Form Title</label>
+                            <input type="text" name="contactFormTitle" placeholder="e.g., Get in Touch" class="page-input" data-page="contact">
+                        </div>
+                        <div class="form-group">
+                            <label>Submit Button Text</label>
+                            <input type="text" name="contactFormSubmitText" placeholder="e.g., Send Message" class="page-input" data-page="contact">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Thank You Message</label>
+                        <textarea name="contactFormThankYou" placeholder="Message to show after form submission..." rows="3" class="page-input" data-page="contact"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Admin Email (where form will be received)</label>
+                        <input type="email" name="contactFormAdminEmail" placeholder="admin@example.com" class="page-input" data-page="contact">
+                    </div>
+                </div>
+
+                <!-- Standard Fields -->
+                <div class="contact-form-section">
+                    <h5 style="color: #2c3e50; margin-bottom: 15px; border-bottom: 2px solid #3498db; padding-bottom: 8px;">Standard Fields</h5>
+                    <div class="contact-field-grid">
+                        <label class="contact-field-checkbox">
+                            <input type="checkbox" name="contactField_name" value="yes" class="contact-form-input" data-page="contact">
+                            <span class="field-icon">👤</span>
+                            <span class="field-label">Name Field</span>
+                        </label>
+                        <label class="contact-field-checkbox">
+                            <input type="checkbox" name="contactField_email" value="yes" class="contact-form-input" data-page="contact">
+                            <span class="field-icon">✉️</span>
+                            <span class="field-label">Email Field</span>
+                        </label>
+                        <label class="contact-field-checkbox">
+                            <input type="checkbox" name="contactField_phone" value="yes" class="contact-form-input" data-page="contact">
+                            <span class="field-icon">📞</span>
+                            <span class="field-label">Phone Field</span>
+                        </label>
+                        <label class="contact-field-checkbox">
+                            <input type="checkbox" name="contactField_message" value="yes" class="contact-form-input" data-page="contact">
+                            <span class="field-icon">📝</span>
+                            <span class="field-label">Message Field</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Custom Fields -->
+                <div class="contact-form-section">
+                    <h5 style="color: #2c3e50; margin-bottom: 15px; border-bottom: 2px solid #3498db; padding-bottom: 8px;">Custom Fields</h5>
+                    <div id="customFieldsContainer"></div>
+                    <button type="button" id="addCustomFieldBtn" class="add-custom-field-btn">
+                        <span>+</span> Add Custom Field
+                    </button>
+                </div>
+            `;
+        }
+
+        // Function to initialize Contact Form Builder
+        function initContactFormBuilder() {
+            const addCustomFieldBtn = document.getElementById('addCustomFieldBtn');
+            const customFieldsContainer = document.getElementById('customFieldsContainer');
+
+            if (addCustomFieldBtn && customFieldsContainer) {
+                addCustomFieldBtn.addEventListener('click', function() {
+                    addCustomField();
+                });
+            }
+        }
+
+        // Function to add a custom field
+        function addCustomField() {
+            const container = document.getElementById('customFieldsContainer');
+            const fieldIndex = container.children.length;
+
+            const customFieldDiv = document.createElement('div');
+            customFieldDiv.className = 'custom-field-row';
+            customFieldDiv.innerHTML = `
+                <div class="custom-field-inputs">
+                    <div class="form-group">
+                        <label>Field Label</label>
+                        <input type="text" name="contactCustomField_${fieldIndex}_label" placeholder="e.g., Budget, Service Type" class="custom-field-input" data-page="contact">
+                    </div>
+                    <div class="form-group">
+                        <label>Field Type</label>
+                        <select name="contactCustomField_${fieldIndex}_type" class="custom-field-input" data-page="contact">
+                            <option value="text">Text Input</option>
+                            <option value="number">Number</option>
+                            <option value="textarea">Textarea (Multi-line)</option>
+                            <option value="email">Email</option>
+                            <option value="tel">Phone</option>
+                            <option value="date">Date</option>
+                            <option value="select">Dropdown Select</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="button" class="remove-custom-field-btn" onclick="removeCustomField(this)">×</button>
+            `;
+
+            container.appendChild(customFieldDiv);
+
+            // Add listeners to new inputs
+            customFieldDiv.querySelectorAll('.custom-field-input').forEach(input => {
+                input.addEventListener('input', updatePageCompletionTicks);
+                input.addEventListener('change', updatePageCompletionTicks);
+            });
+        }
+
+        // Function to remove a custom field
+        function removeCustomField(btn) {
+            const row = btn.closest('.custom-field-row');
+            if (row) {
+                row.remove();
+                updatePageCompletionTicks();
+            }
+        }
+
+        // Function to update completion tick indicators
+        function updatePageCompletionTicks() {
+            document.querySelectorAll('.page-content-panel').forEach(panel => {
+                const pageValue = panel.dataset.page;
+                const inputs = panel.querySelectorAll('.page-input');
+                let hasContent = false;
+
+                inputs.forEach(input => {
+                    if (input.type === 'file') {
+                        if (input.files && input.files.length > 0) {
+                            hasContent = true;
+                        }
+                    } else {
+                        if (input.value.trim() !== '') {
+                            hasContent = true;
+                        }
+                    }
+                });
+
+                // Update tick on corresponding tab
+                const tabBtn = document.querySelector(`.page-tab-btn[data-page="${pageValue}"]`);
+                if (tabBtn) {
+                    const tick = tabBtn.querySelector('.tab-tick');
+                    if (tick) {
+                        tick.style.display = hasContent ? 'inline' : 'none';
+                    }
+                }
+            });
+        }
+
+        // Global function for updating navigation list
+        function updateNavigationList() {
+            const navigationList = document.getElementById('navigationList');
+            const navigationStructureInput = document.getElementById('navigationStructureInput');
+            const headerPagesCheckboxes = document.querySelectorAll('input[name="headerPages"]');
+            const footerPagesCheckboxes = document.querySelectorAll('input[name="footerPages"]');
+            const selectedPages = [];
+
+            // Get all selected pages from headerPages checkboxes
+            headerPagesCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selectedPages.push({
+                        value: checkbox.value,
+                        label: checkbox.parentElement.textContent.trim(),
+                        type: 'header'
+                    });
+                }
+            });
+
+            // Get all selected pages from footerPages checkboxes
+            footerPagesCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selectedPages.push({
+                        value: checkbox.value,
+                        label: checkbox.parentElement.textContent.trim(),
+                        type: 'footer'
+                    });
+                }
+            });
+
+            // Clear existing navigation list
+            navigationList.innerHTML = '';
+
+            // Create navigation items
+            selectedPages.forEach((page, index) => {
+                const navItem = document.createElement('div');
+                navItem.className = 'navigation-item';
+                navItem.draggable = true;
+                navItem.dataset.value = page.value;
+                navItem.dataset.type = page.type;
+                navItem.innerHTML = `
+                    <span class="drag-handle">⋮⋮</span>
+                    <span class="page-name">${page.label} (${page.type})</span>
+                    <span class="remove-btn" onclick="removeFromNavigation('${page.value}', '${page.type}')">×</span>
+                `;
+
+                // Add drag events
+                navItem.addEventListener('dragstart', handleDragStart);
+                navItem.addEventListener('dragend', handleDragEnd);
+                navItem.addEventListener('dragover', handleDragOver);
+                navItem.addEventListener('drop', handleDrop);
+
+                navigationList.appendChild(navItem);
+            });
+
+            // Update hidden input with current order
+            updateNavigationStructureInput();
+        }
+
+        function removeFromNavigation(pageValue, pageType) {
+            const checkbox = document.querySelector(`input[name="${pageType}Pages"][value="${pageValue}"]`);
+            if (checkbox) {
+                checkbox.checked = false;
+                updateDynamicContentFields();
+                updateNavigationList();
+                updatePageCount();
+            }
+        }
+
+        function updateNavigationStructureInput() {
+            const navigationList = document.getElementById('navigationList');
+            const navigationStructureInput = document.getElementById('navigationStructureInput');
+            const items = navigationList.querySelectorAll('.navigation-item');
+            const order = Array.from(items).map(item => item.dataset.value);
+            navigationStructureInput.value = order.join(',');
+        }
+
+        let draggedItem = null;
+
+        function handleDragStart(e) {
+            draggedItem = this;
+            this.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+        }
+
+        function handleDragEnd(e) {
+            this.classList.remove('dragging');
+            draggedItem = null;
+            updateNavigationStructureInput();
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            return false;
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            if (this !== draggedItem) {
+                const navigationList = document.getElementById('navigationList');
+                const allItems = Array.from(navigationList.querySelectorAll('.navigation-item'));
+                const draggedIndex = allItems.indexOf(draggedItem);
+                const targetIndex = allItems.indexOf(this);
+
+                if (draggedIndex < targetIndex) {
+                    this.parentNode.insertBefore(draggedItem, this.nextSibling);
+                } else {
+                    this.parentNode.insertBefore(draggedItem, this);
+                }
+            }
+            return false;
+        }
+
+        // Sidebar navigation logic
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load saved data on page load
+            loadFormData();
+
+            // Add auto-save event listeners to all form inputs
+            const form = document.getElementById('requirementForm');
+            if (form) {
+                const inputs = form.querySelectorAll('input, textarea, select');
+                inputs.forEach(input => {
+                    input.addEventListener('input', debouncedSave);
+                    input.addEventListener('change', debouncedSave);
+                });
+            }
+
+            // Add Clear Saved Data button to sidebar
+            const sidebar = document.querySelector('.sidebar');
+            if (sidebar) {
+                const clearBtn = document.createElement('button');
+                clearBtn.className = 'clear-data-btn';
+                clearBtn.textContent = 'Clear Saved Data';
+                clearBtn.onclick = clearSavedData;
+                sidebar.appendChild(clearBtn);
+            }
+
+            // Color picker functionality
+            const colorPicker = document.getElementById('colorPicker');
+            const colorInput = document.getElementById('colorInput');
+
+            if (colorPicker && colorInput) {
+                // When color is picked, update text input
+                colorPicker.addEventListener('input', function() {
+                    colorInput.value = this.value;
+                    debouncedSave();
+                });
+
+                // When hex code is typed, update color picker
+                colorInput.addEventListener('input', function() {
+                    const hexValue = this.value;
+                    if (/^#[0-9A-Fa-f]{6}$/.test(hexValue)) {
+                        colorPicker.value = hexValue;
+                    }
+                    debouncedSave();
+                });
+            }
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.form-section');
+            const sectionHeaders = document.querySelectorAll('.section-header');
+
+            // Sidebar navigation click
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    const targetSection = this.dataset.section;
+                    const targetEl = document.getElementById(targetSection);
+
+                    // Update active nav link
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // Show target section
+                    sections.forEach(section => {
+                        section.classList.remove('active');
+                        if (section.id === targetSection) {
+                            section.classList.add('active');
+                        }
+                    });
+
+                    // Scroll to top of form content
+                    document.querySelector('.form-content').scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+
+            // Section collapse/expand
+            sectionHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const section = this.closest('.form-section');
+                    const content = section.querySelector('.section-content');
+                    const toggle = this.querySelector('.section-toggle');
+
+                    content.style.display = content.style.display === 'none' ? 'block' : 'none';
+                    toggle.classList.toggle('collapsed');
+                });
+            });
+
+            // Navigation button clicks (Previous/Next)
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const prevSection = this.dataset.prev;
+                    const nextSection = this.dataset.next;
+
+                    if (prevSection) {
+                        navigateToSection(prevSection);
+                    } else if (nextSection) {
+                        navigateToSection(nextSection);
+                    }
+                });
+            });
+
+            function navigateToSection(sectionId) {
+                const targetEl = document.getElementById(sectionId);
+
+                // Update active nav link in sidebar
+                navLinks.forEach(l => l.classList.remove('active'));
+                const activeLink = document.querySelector(`.nav-link[data-section="${sectionId}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
+
+                // Show target section
+                sections.forEach(section => {
+                    section.classList.remove('active');
+                    if (section.id === sectionId) {
+                        section.classList.add('active');
+                    }
+                });
+
+                // Scroll to top of form content
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                // Save current section
+                debouncedSave();
+            }
+
+            // Dynamic show/hide logic
+            // Project Type
+            const projectTypeSelect = document.querySelector('select[name="projectType"]');
+            const otherProjectType = document.getElementById('otherProjectType');
+
+            projectTypeSelect.addEventListener('change', function() {
+                if (this.value === 'other') {
+                    otherProjectType.classList.add('show');
+                } else {
+                    otherProjectType.classList.remove('show');
+                }
+            });
+
+            // Initialize project type field visibility
+            if (projectTypeSelect.value === 'other') {
+                otherProjectType.classList.add('show');
+            } else {
+                otherProjectType.classList.remove('show');
+            }
+
+            // Business Category
+            const businessCategorySelect = document.querySelector('select[name="businessCategory"]');
+            const otherBusinessCategory = document.getElementById('otherBusinessCategory');
+
+            businessCategorySelect.addEventListener('change', function() {
+                if (this.value === 'other') {
+                    otherBusinessCategory.classList.add('show');
+                } else {
+                    otherBusinessCategory.classList.remove('show');
+                }
+            });
+
+            // Initialize business category field visibility
+            if (businessCategorySelect.value === 'other') {
+                otherBusinessCategory.classList.add('show');
+            } else {
+                otherBusinessCategory.classList.remove('show');
+            }
+
+            // Content Ready
+            const contentReadyRadios = document.querySelectorAll('input[name="contentReady"]');
+            const contentFieldsContainer = document.getElementById('contentFieldsContainer');
+
+            contentReadyRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.value === 'no') {
+                        contentFieldsContainer.classList.remove('show');
+                    } else {
+                        contentFieldsContainer.classList.add('show');
+                    }
+                });
+            });
+
+            // Initialize content fields visibility
+            const contentReadyChecked = document.querySelector('input[name="contentReady"]:checked');
+            if (contentReadyChecked && contentReadyChecked.value === 'no') {
+                contentFieldsContainer.classList.remove('show');
+            } else {
+                contentFieldsContainer.classList.add('show');
+            }
+
+            // Sell Type (Products/Services)
+            const sellTypeRadios = document.querySelectorAll('input[name="sellType"]');
+            const productsSection = document.getElementById('productsSection');
+            const servicesSection = document.getElementById('servicesSection');
+
+            sellTypeRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.value === 'products' || this.value === 'both') {
+                        productsSection.classList.add('show');
+                    } else {
+                        productsSection.classList.remove('show');
+                    }
+
+                    if (this.value === 'services' || this.value === 'both') {
+                        servicesSection.classList.add('show');
+                    } else {
+                        servicesSection.classList.remove('show');
+                    }
+                });
+            });
+
+            // Initialize products and services section visibility
+            const sellTypeChecked = document.querySelector('input[name="sellType"]:checked');
+            if (sellTypeChecked && (sellTypeChecked.value === 'products' || sellTypeChecked.value === 'both')) {
+                productsSection.classList.add('show');
+            } else {
+                productsSection.classList.remove('show');
+            }
+
+            if (sellTypeChecked && (sellTypeChecked.value === 'services' || sellTypeChecked.value === 'both')) {
+                servicesSection.classList.add('show');
+            } else {
+                servicesSection.classList.remove('show');
+            }
+
+            // Domain
+            const domainRadios = document.querySelectorAll('input[name="hasDomain"]');
+            const domainYes = document.getElementById('domainYes');
+            const domainNo = document.getElementById('domainNo');
+            
+            domainRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.value === 'yes') {
+                        domainYes.classList.add('show');
+                        domainNo.classList.remove('show');
+                    } else if (this.value === 'no') {
+                        domainYes.classList.remove('show');
+                        domainNo.classList.add('show');
+                    }
+                });
+            });
+
+            // Domain Login Details
+            const domainLoginRadios = document.querySelectorAll('input[name="domainLogin"]');
+            const domainLoginDetails = document.getElementById('domainLoginDetails');
+            
+            domainLoginRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.value === 'yes') {
+                        domainLoginDetails.classList.add('show');
+                    } else {
+                        domainLoginDetails.classList.remove('show');
+                    }
+                });
+            });
+
+            // Hosting
+            const hostingRadios = document.querySelectorAll('input[name="hasHosting"]');
+            const hostingYes = document.getElementById('hostingYes');
+            const hostingNo = document.getElementById('hostingNo');
+            
+            hostingRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.value === 'yes') {
+                        hostingYes.classList.add('show');
+                        hostingNo.classList.remove('show');
+                    } else if (this.value === 'no') {
+                        hostingYes.classList.remove('show');
+                        hostingNo.classList.add('show');
+                    }
+                });
+            });
+
+            // Hosting Login Details
+            const hostingLoginRadios = document.querySelectorAll('input[name="hostingLogin"]');
+            const hostingLoginDetails = document.getElementById('hostingLoginDetails');
+            
+            hostingLoginRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.value === 'yes') {
+                        hostingLoginDetails.classList.add('show');
+                    } else {
+                        hostingLoginDetails.classList.remove('show');
+                    }
+                });
+            });
+
+            // Theme
+            const themeRadios = document.querySelectorAll('input[name="hasTheme"]');
+            const themeYes = document.getElementById('themeYes');
+            const themeNo = document.getElementById('themeNo');
+
+            themeRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.value === 'yes') {
+                        themeYes.classList.add('show');
+                        themeNo.classList.remove('show');
+                    } else if (this.value === 'no') {
+                        themeNo.classList.add('show');
+                        themeYes.classList.remove('show');
+                    }
+                });
+            });
+
+            // Platform Selection - Shopify
+            const platformSelect = document.querySelector('select[name="platform"]');
+            const shopifyDetails = document.getElementById('shopifyDetails');
+
+            if (platformSelect) {
+                platformSelect.addEventListener('change', function() {
+                    if (this.value === 'shopify') {
+                        shopifyDetails.classList.add('show');
+                    } else {
+                        shopifyDetails.classList.remove('show');
+                    }
+                });
+            }
+
+            // Shopify Login Details
+            const shopifyAccountRadios = document.querySelectorAll('input[name="hasShopifyAccount"]');
+            const shopifyLoginDetails = document.getElementById('shopifyLoginDetails');
+
+            shopifyAccountRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.value === 'yes') {
+                        shopifyLoginDetails.classList.add('show');
+                    } else {
+                        shopifyLoginDetails.classList.remove('show');
+                    }
+                });
+            });
+
+            // Logo
+            const logoRadios = document.querySelectorAll('input[name="hasLogo"]');
+            const logoYes = document.getElementById('logoYes');
+            const logoNo = document.getElementById('logoNo');
+
+            logoRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.value === 'yes') {
+                        logoYes.classList.add('show');      // Show upload option only
+                        logoNo.classList.remove('show');     // Hide size & colors
+                    } else if (this.value === 'no') {
+                        logoYes.classList.remove('show');     // Hide upload option
+                        logoNo.classList.add('show');       // Show size & colors
+                    } else {
+                        logoYes.classList.remove('show');
+                        logoNo.classList.remove('show');
+                    }
+                });
+            });
+
+            // Company Details Checkbox
+            const addCompanyDetailsCheckbox = document.getElementById('addCompanyDetails');
+            const companyDetailsSection = document.getElementById('companyDetailsSection');
+
+            if (addCompanyDetailsCheckbox && companyDetailsSection) {
+                addCompanyDetailsCheckbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        companyDetailsSection.classList.add('show');
+                    } else {
+                        companyDetailsSection.classList.remove('show');
+                    }
+                });
+
+                // Initialize company details visibility on page load
+                if (addCompanyDetailsCheckbox.checked) {
+                    companyDetailsSection.classList.add('show');
+                } else {
+                    companyDetailsSection.classList.remove('show');
+                }
+            }
+
+            // Ecommerce
+            const ecommerceRadios = document.querySelectorAll('input[name="isEcommerce"]');
+            const ecommerceYes = document.getElementById('ecommerceYes');
+            
+            ecommerceRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.value === 'yes') {
+                        ecommerceYes.classList.add('show');
+                    } else {
+                        ecommerceYes.classList.remove('show');
+                    }
+                });
+            });
+
+            // Payment Methods
+            const paymentCheckboxes = document.querySelectorAll('input[name="paymentMethods"]');
+            const razorpayDetails = document.getElementById('razorpayDetails');
+            const stripeDetails = document.getElementById('stripeDetails');
+            const paypalDetails = document.getElementById('paypalDetails');
+            const otherPaymentDetails = document.getElementById('otherPaymentDetails');
+            
+            paymentCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    if (this.value === 'razorpay') {
+                        razorpayDetails.classList.toggle('show', this.checked);
+                    }
+                    if (this.value === 'stripe') {
+                        stripeDetails.classList.toggle('show', this.checked);
+                    }
+                    if (this.value === 'paypal') {
+                        paypalDetails.classList.toggle('show', this.checked);
+                    }
+                    if (this.value === 'other') {
+                        otherPaymentDetails.classList.toggle('show', this.checked);
+                    }
+                });
+            });
+
+            // Currencies
+            const currencyCheckboxes = document.querySelectorAll('input[name="currencies"]');
+            const otherCurrency = document.getElementById('otherCurrency');
+            
+            currencyCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    if (this.value === 'other') {
+                        otherCurrency.classList.toggle('show', this.checked);
+                    }
+                });
+            });
+
+            // Shipping Type
+            const shippingSelect = document.querySelector('select[name="shippingType"]');
+            const flatRateDetails = document.getElementById('flatRateDetails');
+            
+            if (shippingSelect) {
+                shippingSelect.addEventListener('change', function() {
+                    flatRateDetails.classList.toggle('show', this.value === 'flat');
+                });
+            }
+
+            // Google Analytics
+            const analyticsRadios = document.querySelectorAll('input[name="hasAnalytics"]');
+            const analyticsYes = document.getElementById('analyticsYes');
+            const analyticsSetup = document.getElementById('analyticsSetup');
+
+            analyticsRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.value === 'yes') {
+                        analyticsYes.classList.add('show');
+                        analyticsSetup.classList.remove('show');
+                    } else if (this.value === 'no') {
+                        analyticsSetup.classList.add('show');
+                        analyticsYes.classList.remove('show');
+                    } else {
+                        analyticsYes.classList.remove('show');
+                        analyticsSetup.classList.remove('show');
+                    }
+                });
+            });
+
+            // Legal Documents
+            const privacyPolicyRadios = document.querySelectorAll('input[name="hasPrivacyPolicy"]');
+            const privacyPolicyYes = document.getElementById('privacyPolicyYes');
+
+            privacyPolicyRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.value === 'yes') {
+                        privacyPolicyYes.classList.add('show');
+                    } else {
+                        privacyPolicyYes.classList.remove('show');
+                    }
+                });
+            });
+
+            const termsRadios = document.querySelectorAll('input[name="hasTerms"]');
+            const termsYes = document.getElementById('termsYes');
+
+            termsRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.value === 'yes') {
+                        termsYes.classList.add('show');
+                    } else {
+                        termsYes.classList.remove('show');
+                    }
+                });
+            });
+
+            // Dynamic Pages
+            let pageCount = 0;
+            const addPageBtn = document.getElementById('addPageBtn');
+            const additionalPages = document.getElementById('additionalPages');
+            
+            addPageBtn.addEventListener('click', function() {
+                pageCount++;
+                const pageDiv = document.createElement('div');
+                pageDiv.className = 'dynamic-item';
+                pageDiv.innerHTML = `
+                    <button type="button" class="btn btn-remove" onclick="this.parentElement.remove();">Remove</button>
+                    <div class="form-group">
+                        <label>Page Name</label>
+                        <input type="text" name="additionalPageName_${pageCount}" placeholder="e.g., Portfolio, Testimonials">
+                    </div>
+                    <div class="form-group">
+                        <label>Add to</label>
+                        <select name="additionalPageType_${pageCount}">
+                            <option value="header">Header (Main Navigation)</option>
+                            <option value="footer">Footer (Footer Links)</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-add" onclick="addPageToCheckboxGroup(this)">Add to Website Structure</button>
+                `;
+                additionalPages.appendChild(pageDiv);
+            });
+
+            // Dynamic Content Fields based on selected pages
+            const headerPagesCheckboxes = document.querySelectorAll('input[name="headerPages"]');
+            const footerPagesCheckboxes = document.querySelectorAll('input[name="footerPages"]');
+            const dynamicContentFields = document.getElementById('dynamicContentFields');
+
+            // Listen for changes in headerPages checkboxes
+            headerPagesCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    updateDynamicContentFields();
+                    updateNavigationList();
+                    updatePageCount();
+                });
+            });
+
+            // Listen for changes in footerPages checkboxes
+            footerPagesCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    updateDynamicContentFields();
+                    updateNavigationList();
+                    updatePageCount();
+                });
+            });
+
+            // Initialize dynamic content fields on page load
+            updateDynamicContentFields();
+            updateNavigationList();
+            updatePageCount();
+
+            // Form Validation and Submission
+            const requirementForm = document.getElementById('requirementForm');
+
+            requirementForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                console.log('Submit button clicked');
+
+                // Show loader
+                document.getElementById('loaderOverlay').classList.add('show');
+
+                let isValid = true;
+                let firstInvalidInput = null;
+                const requiredInputs = requirementForm.querySelectorAll('[required]');
+                console.log('Required inputs found:', requiredInputs.length);
+
+                // Track radio button groups to avoid duplicate validation
+                const radioGroups = new Set();
+
+                requiredInputs.forEach(input => {
+                    const formGroup = input.closest('.form-group');
+
+                    // Skip if field is hidden (in conditional field)
+                    const isHidden = input.closest('.conditional-field') &&
+                                   !input.closest('.conditional-field').classList.contains('show');
+                    if (isHidden) {
+                        console.log(`Skipping hidden field: ${input.name}`);
+                        return;
+                    }
+
+                    // Skip radio buttons if we've already validated this group
+                    if (input.type === 'radio') {
+                        if (radioGroups.has(input.name)) return;
+                        radioGroups.add(input.name);
+
+                        // Check if any radio in this group is checked
+                        const radioGroup = requirementForm.querySelectorAll(`input[name="${input.name}"]`);
+                        const isChecked = Array.from(radioGroup).some(radio => radio.checked);
+
+                        console.log(`Radio group ${input.name}: checked = ${isChecked}`);
+
+                        if (!isChecked) {
+                            isValid = false;
+                            formGroup.classList.add('error');
+                            radioGroup.forEach(r => r.classList.add('error'));
+                            if (!firstInvalidInput) {
+                                firstInvalidInput = radioGroup[0];
+                            }
+                            console.log(`Radio group ${input.name} is invalid`);
+                        } else {
+                            formGroup.classList.remove('error');
+                            radioGroup.forEach(r => r.classList.remove('error'));
+                        }
+                    } else {
+                        // Handle other input types
+                        console.log(`Input ${input.name}: value = "${input.value}"`);
+                        if (!input.value.trim()) {
+                            isValid = false;
+                            formGroup.classList.add('error');
+                            input.classList.add('error');
+                            if (!firstInvalidInput) {
+                                firstInvalidInput = input;
+                            }
+                            console.log(`Input ${input.name} is invalid (empty)`);
+                        } else {
+                            formGroup.classList.remove('error');
+                            input.classList.remove('error');
+                        }
+                    }
+                });
+
+                console.log('Validation result:', isValid);
+
+                // Scroll to first invalid field if validation fails
+                if (!isValid && firstInvalidInput) {
+                    // Hide loader
+                    document.getElementById('loaderOverlay').classList.remove('show');
+
+                    // Show the section containing the invalid field
+                    const invalidSection = firstInvalidInput.closest('.form-section');
+                    if (invalidSection) {
+                        // Switch to the section
+                        sections.forEach(section => {
+                            section.classList.remove('active');
+                            if (section.id === invalidSection.id) {
+                                section.classList.add('active');
+                            }
+                        });
+
+                        // Update sidebar navigation
+                        navLinks.forEach(l => l.classList.remove('active'));
+                        const activeLink = document.querySelector(`.nav-link[data-section="${invalidSection.id}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add('active');
+                        }
+                    }
+
+                    firstInvalidInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    firstInvalidInput.focus();
+                    return;
+                }
+
+                // Email validation
+                const emailInputs = requirementForm.querySelectorAll('input[type="email"]');
+                emailInputs.forEach(input => {
+                    const formGroup = input.closest('.form-group');
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (input.value && !emailRegex.test(input.value)) {
+                        isValid = false;
+                        formGroup.classList.add('error');
+                        input.classList.add('error');
+                        if (!firstInvalidInput) {
+                            firstInvalidInput = input;
+                        }
+                    }
+                });
+
+                // Scroll to first invalid email field if email validation fails
+                if (!isValid && firstInvalidInput) {
+                    const invalidSection = firstInvalidInput.closest('.form-section');
+                    if (invalidSection) {
+                        sections.forEach(section => {
+                            section.classList.remove('active');
+                            if (section.id === invalidSection.id) {
+                                section.classList.add('active');
+                            }
+                        });
+
+                        navLinks.forEach(l => l.classList.remove('active'));
+                        const activeLink = document.querySelector(`.nav-link[data-section="${invalidSection.id}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add('active');
+                        }
+                    }
+
+                    firstInvalidInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    firstInvalidInput.focus();
+                    return;
+                }
+
+                if (isValid) {
+                    // Collect form data
+                    const formData = new FormData(requirementForm);
+                    const data = {};
+
+                    // Add client ID to data
+                    const clientId = generateClientId();
+                    data.client_id = clientId;
+                    console.log('Main form submission - Client ID added:', clientId);
+
+                    // Handle regular form fields
+                    formData.forEach((value, key) => {
+                        if (key.includes('File')) return; // Skip file inputs, handle separately
+                        if (data[key]) {
+                            if (Array.isArray(data[key])) {
+                                data[key].push(value);
+                            } else {
+                                data[key] = [data[key], value];
+                            }
+                        } else {
+                            data[key] = value;
+                        }
+                    });
+
+                    // Collect structured page content from dynamic fields
+                    data.pageContents = {};
+                    data.pageAttachments = {};
+                    data.pageImages = {};
+                    data.pageHeadings = {};
+                    data.pageSubheadings = {};
+                    
+                    // Get all page headings
+                    const pageHeadings = document.querySelectorAll('input[name^="pageHeading_"]');
+                    pageHeadings.forEach(input => {
+                        const pageName = input.name.replace('pageHeading_', '');
+                        data.pageHeadings[pageName] = input.value;
+                    });
+
+                    // Get all page subheadings
+                    const pageSubheadings = document.querySelectorAll('input[name^="pageSubheading_"]');
+                    pageSubheadings.forEach(input => {
+                        const pageName = input.name.replace('pageSubheading_', '');
+                        data.pageSubheadings[pageName] = input.value;
+                    });
+
+                    // Get all dynamic content textareas
+                    const contentTextareas = document.querySelectorAll('textarea[name^="content_"]');
+                    contentTextareas.forEach(textarea => {
+                        const pageName = textarea.name.replace('content_', '');
+                        data.pageContents[pageName] = textarea.value;
+                    });
+
+                    // Get all page images
+                    const pageImageInputs = document.querySelectorAll('input[name^="pageImage_"]');
+                    pageImageInputs.forEach(input => {
+                        if (input.files.length > 0) {
+                            const pageName = input.name.replace('pageImage_', '');
+                            console.log(`Found image for ${pageName}:`, input.files[0].name);
+                        }
+                    });
+
+                    // Get all dynamic file inputs for pages
+                    const pageFileInputs = document.querySelectorAll('input[type="file"][name^="content_"][name$="_file"]');
+                    pageFileInputs.forEach(input => {
+                        if (input.files.length > 0) {
+                            const pageName = input.name.replace('content_', '').replace('_file', '');
+                            console.log(`Found file for ${pageName}:`, input.files[0].name);
+                        }
+                    });
+
+                    // Collect Contact Form Builder fields (if contact page exists)
+                    const contactFormTitle = document.querySelector('input[name="contactFormTitle"]');
+                    if (contactFormTitle) {
+                        data.contactFormTitle = contactFormTitle.value;
+                    }
+                    const contactFormSubmitText = document.querySelector('input[name="contactFormSubmitText"]');
+                    if (contactFormSubmitText) {
+                        data.contactFormSubmitText = contactFormSubmitText.value;
+                    }
+                    const contactFormThankYou = document.querySelector('textarea[name="contactFormThankYou"]');
+                    if (contactFormThankYou) {
+                        data.contactFormThankYou = contactFormThankYou.value;
+                    }
+                    const contactFormAdminEmail = document.querySelector('input[name="contactFormAdminEmail"]');
+                    if (contactFormAdminEmail) {
+                        data.contactFormAdminEmail = contactFormAdminEmail.value;
+                    }
+
+                    // Collect Contact Form standard field checkboxes
+                    const contactFieldName = document.querySelector('input[name="contactField_name"]');
+                    if (contactFieldName) {
+                        data.contactField_name = contactFieldName.checked ? 'yes' : 'no';
+                    }
+                    const contactFieldEmail = document.querySelector('input[name="contactField_email"]');
+                    if (contactFieldEmail) {
+                        data.contactField_email = contactFieldEmail.checked ? 'yes' : 'no';
+                    }
+                    const contactFieldPhone = document.querySelector('input[name="contactField_phone"]');
+                    if (contactFieldPhone) {
+                        data.contactField_phone = contactFieldPhone.checked ? 'yes' : 'no';
+                    }
+                    const contactFieldMessage = document.querySelector('input[name="contactField_message"]');
+                    if (contactFieldMessage) {
+                        data.contactField_message = contactFieldMessage.checked ? 'yes' : 'no';
+                    }
+
+                    // Collect Contact Form custom fields
+                    const customFieldRows = document.querySelectorAll('.custom-field-row');
+                    customFieldRows.forEach((row, index) => {
+                        const labelInput = row.querySelector('input[name^="contactCustomField_"][name$="_label"]');
+                        const typeSelect = row.querySelector('select[name^="contactCustomField_"][name$="_type"]');
+                        if (labelInput && typeSelect) {
+                            data[`contactCustomField_${index}_label`] = labelInput.value;
+                            data[`contactCustomField_${index}_type`] = typeSelect.value;
+                        }
+                    });
+
+                    // Handle file uploads
+                    const fileInputs = requirementForm.querySelectorAll('input[type="file"]');
+                    const filePromises = [];
+
+                    fileInputs.forEach(input => {
+                        if (input.files.length > 0) {
+                            const file = input.files[0];
+                            const reader = new FileReader();
+                            const promise = new Promise((resolve) => {
+                                reader.onload = function(e) {
+                                    resolve({
+                                        name: input.name,
+                                        fileName: file.name,
+                                        fileType: file.type,
+                                        data: e.target.result
+                                    });
+                                };
+                                reader.readAsDataURL(file);
+                            });
+                            filePromises.push(promise);
+                        }
+                    });
+
+                    // Wait for all files to be processed
+                    Promise.all(filePromises).then(fileResults => {
+                        fileResults.forEach(file => {
+                            // Check if this is a page image
+                            if (file.name.startsWith('pageImage_')) {
+                                const pageName = file.name.replace('pageImage_', '');
+                                if (!data.pageImages) {
+                                    data.pageImages = {};
+                                }
+                                data.pageImages[pageName] = {
+                                    fileName: file.fileName,
+                                    fileType: file.fileType,
+                                    data: file.data
+                                };
+                            }
+                            // Check if this is a page attachment
+                            else if (file.name.startsWith('content_') && file.name.endsWith('_file')) {
+                                const pageName = file.name.replace('content_', '').replace('_file', '');
+                                if (!data.pageAttachments) {
+                                    data.pageAttachments = {};
+                                }
+                                data.pageAttachments[pageName] = {
+                                    fileName: file.fileName,
+                                    fileType: file.fileType,
+                                    data: file.data
+                                };
+                            } else {
+                                // Regular file handling
+                                data[file.name] = file.fileName;
+                                data[file.name + '_type'] = file.fileType;
+                                data[file.name + '_data'] = file.data;
+                            }
+                        });
+
+                        // Log to console
+                        console.log('Form Data Submitted:', JSON.stringify(data, null, 2));
+                        console.log('Client ID being sent:', data.client_id);
+                        console.log('Company Name being sent:', data.companyName);
+
+                        // Send to PHP backend
+                        let submitUrl;
+                        // Check if running on localhost:8000 (development server)
+                        if (window.location.port === '8000') {
+                            submitUrl = 'http://localhost/Recharge%20form/submit_form.php';
+                        } else if (window.location.pathname.includes('Recharge%20form')) {
+                            submitUrl = window.location.origin + '/Recharge%20form/submit_form.php';
+                        } else {
+                            submitUrl = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/submit_form.php');
+                        }
+                        console.log('Submitting to:', submitUrl); // Debug log
+                        console.log('Data size:', JSON.stringify(data).length, 'bytes');
+
+                        // Add timeout to prevent infinite waiting
+                        const controller = new AbortController();
+                        const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+
+                        fetch(submitUrl, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(data),
+                            signal: controller.signal
+                        })
+                        .then(response => {
+                            clearTimeout(timeoutId);
+                            console.log('Response status:', response.status);
+                            console.log('Response headers:', response.headers);
+
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! status: ${response.status}`);
+                            }
+                            return response.text().then(text => {
+                                console.log('Response text:', text);
+                                try {
+                                    return JSON.parse(text);
+                                } catch (e) {
+                                    console.error('JSON parse error:', e);
+                                    throw new Error('Invalid JSON response from server');
+                                }
+                            });
+                        })
+                        .then(result => {
+                            console.log('Success!', result);
+                            // Hide loader
+                            document.getElementById('loaderOverlay').classList.remove('show');
+
+                            if (result.success) {
+                                // Hide form and show thank you section
+                                document.querySelector('.sidebar').style.display = 'none';
+                                document.querySelector('.header').style.display = 'none';
+                                document.querySelectorAll('.form-section').forEach(section => {
+                                    section.style.display = 'none';
+                                });
+                                document.getElementById('thankYouSection').style.display = 'block';
+
+                                // Update thank you message with client ID
+                                const thankYouContent = document.querySelector('.thank-you-content');
+                                thankYouContent.innerHTML = `
+                                    <div class="thank-you-icon">✓</div>
+                                    <h1>Thank You!</h1>
+                                    <p>Your form has been successfully submitted.</p>
+                                    <p><strong>Your Client ID: ${result.client_id}</strong></p>
+                                    <p>Please save this ID for future reference.</p>
+                                    <p>We will review your requirements and get back to you soon.</p>
+                                `;
+
+                                // Scroll to top
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                                // Clear saved data after successful submission
+                                localStorage.removeItem(STORAGE_KEY);
+                                localStorage.removeItem(CLIENT_ID_KEY);
+                            } else {
+                                throw new Error(result.message || 'Submission failed');
+                            }
+                        })
+                        .catch(error => {
+                            clearTimeout(timeoutId);
+                            console.error('Error!', error.message);
+                            console.error('Error details:', error);
+                            // Hide loader
+                            document.getElementById('loaderOverlay').classList.remove('show');
+
+                            // Show error message
+                            const errorMessage = document.createElement('div');
+                            errorMessage.className = 'error-message show';
+                            errorMessage.style.background = '#fee';
+                            errorMessage.style.color = '#c33';
+                            errorMessage.style.padding = '20px';
+                            errorMessage.style.borderRadius = '8px';
+                            errorMessage.style.marginBottom = '20px';
+                            errorMessage.style.textAlign = 'center';
+                            errorMessage.innerHTML = `
+                                <strong>Submission Error</strong><br>
+                                There was an error submitting your form. Please try again or contact support.<br>
+                                <small>Error: ${error.message}</small>
+                            `;
+                            
+                            const form = document.getElementById('requirementForm');
+                            form.parentNode.insertBefore(errorMessage, form);
+                            
+                            // Remove error message after 5 seconds
+                            setTimeout(() => {
+                                if (errorMessage.parentNode) {
+                                    errorMessage.parentNode.removeChild(errorMessage);
+                                }
+                            }, 5000);
+                        });
+                    });
+                } else {
+                    // Scroll to first error
+                    const firstError = requirementForm.querySelector('.error');
+                    if (firstError) {
+                        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }
+            });
+
+            // Remove error styling on input
+            requirementForm.addEventListener('input', function(e) {
+                if (e.target.classList.contains('error')) {
+                    e.target.classList.remove('error');
+                    e.target.closest('.form-group').classList.remove('error');
+                }
+            });
+
+            // Display selected file name
+            requirementForm.addEventListener('change', function(e) {
+                if (e.target.classList.contains('file-input')) {
+                    const fileNameSpan = e.target.parentElement.querySelector('.file-name');
+                    if (e.target.files.length > 0) {
+                        fileNameSpan.textContent = 'Selected: ' + e.target.files[0].name;
+                    } else {
+                        fileNameSpan.textContent = '';
+                    }
+                }
+            });
+        });
+
+        // Password toggle function
+        function togglePassword(fieldId) {
+            const passwordField = document.getElementById(fieldId);
+            const toggleBtn = passwordField.nextElementSibling;
+            
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                toggleBtn.textContent = '🙈';
+            } else {
+                passwordField.type = 'password';
+                toggleBtn.textContent = '👁️';
+            }
+        }
+    </script>
+</body>
+</html>

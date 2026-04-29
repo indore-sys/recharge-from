@@ -1,0 +1,19 @@
+# Security settings for Client Requirements System
+
+# Prevent directory listing
+Options -Indexes
+
+# Protect sensitive files
+<Files "config.php">
+    Require all denied
+</Files>
+
+# Set secure headers
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options nosniff
+    Header always set X-Frame-Options DENY
+    Header always set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Error pages
+ErrorDocument 404 "Page not found"
