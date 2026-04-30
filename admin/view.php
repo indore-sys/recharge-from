@@ -639,6 +639,18 @@ function displayArray($values) {
             <div class="section-content">
                 <div class="field-grid">
                     <div class="field-group">
+                        <div class="field-label">Application Type</div>
+                        <div class="field-value"><?php echo displayValue($form_data['applicationType'] ?? ''); ?></div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field-label">Brand Name</div>
+                        <div class="field-value"><?php echo displayValue($form_data['brandName'] ?? ''); ?></div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field-label">Brief Brand Description</div>
+                        <div class="field-value"><?php echo displayValue($form_data['brandShortDescription'] ?? ''); ?></div>
+                    </div>
+                    <div class="field-group">
                         <div class="field-label">Project Type</div>
                         <div class="field-value"><?php echo displayValue($form_data['projectType'] ?? ''); ?></div>
                     </div>
@@ -670,6 +682,16 @@ function displayArray($values) {
                 <div class="field-group">
                     <div class="field-label">Project Description</div>
                     <div class="field-value"><?php echo displayValue($form_data['projectDescription'] ?? ''); ?></div>
+                </div>
+                <div class="field-group">
+                    <div class="field-label">Business Goals & Visitor Journey</div>
+                    <div class="field-value">
+                        <strong>Goals:</strong> <?php echo displayArray($form_data['businessGoals'] ?? []); ?><br>
+                        <strong>Target Audience:</strong> <?php echo displayValue($form_data['targetAudience'] ?? ''); ?><br>
+                        <strong>Visitor Problem:</strong> <?php echo displayValue($form_data['visitorProblem'] ?? ''); ?><br>
+                        <strong>Primary Actions:</strong> <?php echo displayArray($form_data['visitorActions'] ?? []); ?><br>
+                        <strong>Priority Focus:</strong> <?php echo displayArray($form_data['priorityFocus'] ?? []); ?>
+                    </div>
                 </div>
                 <?php if (!empty($form_data['otherProjectTypeInput'])): ?>
                     <div class="field-group">
@@ -714,6 +736,12 @@ function displayArray($values) {
                         <?php if (!empty($form_data['domainProvider'])): ?>
                             <strong>Provider:</strong> <?php echo displayValue($form_data['domainProvider']); ?><br>
                         <?php endif; ?>
+                        <?php if (!empty($form_data['domainRegistrationSource'])): ?>
+                            <strong>Registered With:</strong> <?php echo displayValue($form_data['domainRegistrationSource']); ?><br>
+                        <?php endif; ?>
+                        <?php if (!empty($form_data['domainManagementPreference'])): ?>
+                            <strong>Domain Handling:</strong> <?php echo displayValue($form_data['domainManagementPreference']); ?><br>
+                        <?php endif; ?>
                         <?php if (!empty($form_data['preferredDomain'])): ?>
                             <strong>Preferred Domain:</strong> <?php echo displayValue($form_data['preferredDomain']); ?>
                         <?php endif; ?>
@@ -738,6 +766,9 @@ function displayArray($values) {
                         <?php endif; ?>
                         <?php if (!empty($form_data['cpanelUrl'])): ?>
                             <strong>cPanel URL:</strong> <?php echo displayValue($form_data['cpanelUrl']); ?>
+                        <?php endif; ?>
+                        <?php if (!empty($form_data['getspaceRegistrationEmail'])): ?>
+                            <br><strong>Getspace Email:</strong> <?php echo displayValue($form_data['getspaceRegistrationEmail']); ?>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -798,6 +829,28 @@ function displayArray($values) {
                         <strong>Has Theme:</strong> <?php echo displayValue($form_data['hasTheme'] ?? ''); ?><br>
                         <?php if (!empty($form_data['themeName'])): ?>
                             <strong>Theme Name:</strong> <?php echo displayValue($form_data['themeName']); ?><br>
+                        <?php endif; ?>
+                        <?php if (!empty($form_data['websitePageStyle'])): ?>
+                            <strong>Page Style:</strong> <?php echo displayValue($form_data['websitePageStyle']); ?><br>
+                        <?php endif; ?>
+                        <?php if (!empty($form_data['designStyle'])): ?>
+                            <strong>Design Style:</strong> <?php echo displayValue($form_data['designStyle']); ?><br>
+                        <?php endif; ?>
+                        <?php if (!empty($form_data['colorScheme'])): ?>
+                            <strong>Color Scheme:</strong> <?php echo displayValue($form_data['colorScheme']); ?><br>
+                        <?php endif; ?>
+                        <?php if (!empty($form_data['fontPreference'])): ?>
+                            <strong>Font Preference:</strong> <?php echo displayValue($form_data['fontPreference']); ?><br>
+                        <?php endif; ?>
+                        <?php if (!empty($form_data['fontUrl'])): ?>
+                            <strong>Font URL / Name:</strong> <?php echo displayValue($form_data['fontUrl']); ?><br>
+                        <?php endif; ?>
+                        <?php if (!empty($form_data['referenceWebsite1']) || !empty($form_data['referenceWebsite2']) || !empty($form_data['referenceWebsite3'])): ?>
+                            <strong>Reference Sites:</strong>
+                            <?php echo displayArray(array_filter([$form_data['referenceWebsite1'] ?? '', $form_data['referenceWebsite2'] ?? '', $form_data['referenceWebsite3'] ?? ''])); ?><br>
+                        <?php endif; ?>
+                        <?php if (!empty($form_data['designComments'])): ?>
+                            <strong>Design Comments:</strong> <?php echo nl2br(htmlspecialchars($form_data['designComments'])); ?>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -877,16 +930,45 @@ function displayArray($values) {
                     <?php endif; ?>
 
                     <?php if (!empty($form_data['logoColors'])): ?>
-                        <div class="field-group">
-                            <div class="field-label">Logo Colors & Symbols</div>
-                            <div class="field-value"><?php echo nl2br(htmlspecialchars($form_data['logoColors'])); ?></div>
+                    <div class="field-group">
+                        <div class="field-label">Logo Colors & Symbols</div>
+                        <div class="field-value"><?php echo nl2br(htmlspecialchars($form_data['logoColors'])); ?></div>
+                    </div>
+                    <?php endif; ?>
+                    <?php if (!empty($form_data['temporaryLogoText']) || !empty($form_data['professionalLogoText']) || !empty($form_data['professionalLogoDescription'])): ?>
+                    <div class="field-group">
+                        <div class="field-label">Logo Request Details</div>
+                        <div class="field-value">
+                            <?php if (!empty($form_data['temporaryLogoText'])): ?>
+                                <strong>Temporary Logo Text:</strong> <?php echo displayValue($form_data['temporaryLogoText']); ?><br>
+                            <?php endif; ?>
+                            <?php if (!empty($form_data['professionalLogoText'])): ?>
+                                <strong>Professional Logo Text:</strong> <?php echo displayValue($form_data['professionalLogoText']); ?><br>
+                            <?php endif; ?>
+                            <?php if (!empty($form_data['professionalLogoDescription'])): ?>
+                                <strong>Professional Logo Brief:</strong> <?php echo nl2br(htmlspecialchars($form_data['professionalLogoDescription'])); ?>
+                            <?php endif; ?>
                         </div>
+                    </div>
                     <?php endif; ?>
 
                     <div class="field-group">
                         <div class="field-label">Brand Guidelines</div>
                         <div class="field-value"><?php echo displayValue($form_data['brandGuidelines'] ?? 'Not Provided'); ?></div>
                     </div>
+                    <div class="field-group">
+                        <div class="field-label">Asset Links</div>
+                        <div class="field-value"><?php echo displayValue($form_data['assetLinks'] ?? ''); ?></div>
+                    </div>
+                    <?php if (!empty($form_data['businessAssetsFile'])): ?>
+                    <div class="field-group">
+                        <div class="field-label">Uploaded Business Assets</div>
+                        <div class="field-value">
+                            <strong>File:</strong> <?php echo displayValue($form_data['businessAssetsFile']); ?><br>
+                            <strong>Type:</strong> <?php echo displayValue($form_data['businessAssetsFile_type'] ?? ''); ?>
+                        </div>
+                    </div>
+                    <?php endif; ?>
 
                     <div class="field-group">
                         <div class="field-label">Brand Voice/Tone</div>
@@ -980,10 +1062,17 @@ function displayArray($values) {
                 <!-- Content Collection Subsection -->
                 <div class="subsection">
                     <h4 style="color: #2c3e50; border-bottom: 2px solid #e74c3c; padding-bottom: 8px; margin-bottom: 18px;">📄 CONTENT COLLECTION</h4>
-                    <div class="field-group">
-                        <div class="field-label">Content Ready Status</div>
-                        <div class="field-value"><?php echo displayValue($form_data['contentReady'] ?? 'Not Provided'); ?></div>
+                <div class="field-group">
+                    <div class="field-label">Content Ready Status</div>
+                    <div class="field-value"><?php echo displayValue($form_data['contentReady'] ?? 'Not Provided'); ?></div>
+                </div>
+                <div class="field-group">
+                    <div class="field-label">Content & Media Support</div>
+                    <div class="field-value">
+                        <strong>Content Support:</strong> <?php echo displayArray($form_data['contentSupport'] ?? []); ?><br>
+                        <strong>Media Support:</strong> <?php echo displayArray($form_data['mediaSupport'] ?? []); ?>
                     </div>
+                </div>
                 </div>
 
                 
@@ -1320,6 +1409,57 @@ function displayArray($values) {
                     </div>
                 <?php endif; ?>
 
+                <?php
+                $testimonialItems = [];
+                $galleryItems = [];
+                foreach ($form_data as $key => $value) {
+                    if (preg_match('/^testimonial_(\d+)_name$/', $key, $matches) && !empty($value)) {
+                        $index = $matches[1];
+                        $testimonialItems[] = [
+                            'name' => $value,
+                            'date' => $form_data["testimonial_{$index}_date"] ?? '',
+                            'text' => $form_data["testimonial_{$index}_text"] ?? ''
+                        ];
+                    }
+                    if (preg_match('/^gallery_(\d+)_caption$/', $key, $matches) && !empty($value)) {
+                        $index = $matches[1];
+                        $galleryItems[] = [
+                            'caption' => $value,
+                            'file' => $form_data["gallery_{$index}_image"] ?? ''
+                        ];
+                    }
+                }
+                ?>
+                <?php if (!empty($form_data['pageExtras']) || !empty($testimonialItems) || !empty($galleryItems) || !empty($form_data['galleryTitle'])): ?>
+                    <div class="field-group">
+                        <div class="field-label">Page Extras</div>
+                        <div class="field-value">
+                            <?php if (!empty($form_data['pageExtras'])): ?>
+                                <strong>Selected Extras:</strong> <?php echo displayArray($form_data['pageExtras']); ?><br>
+                            <?php endif; ?>
+                            <?php if (!empty($testimonialItems)): ?>
+                                <strong>Testimonials:</strong><br>
+                                <?php foreach ($testimonialItems as $item): ?>
+                                    <?php echo displayValue($item['name']); ?> <?php echo !empty($item['date']) ? '(' . htmlspecialchars($item['date']) . ')' : ''; ?>:
+                                    <?php echo displayValue($item['text']); ?><br>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                            <?php if (!empty($form_data['galleryTitle'])): ?>
+                                <strong>Gallery:</strong> <?php echo displayValue($form_data['galleryTitle']); ?><br>
+                            <?php endif; ?>
+                            <?php if (!empty($form_data['galleryDescription'])): ?>
+                                <?php echo nl2br(htmlspecialchars($form_data['galleryDescription'])); ?><br>
+                            <?php endif; ?>
+                            <?php if (!empty($galleryItems)): ?>
+                                <strong>Gallery Items:</strong><br>
+                                <?php foreach ($galleryItems as $item): ?>
+                                    <?php echo displayValue($item['caption']); ?> <?php echo !empty($item['file']) ? '- ' . displayValue($item['file']) : ''; ?><br>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
                 <!-- Content Collection Fields -->
                 <?php if (!empty($form_data['sellType']) && in_array($form_data['sellType'], ['services', 'both'])): ?>
                     <div class="field-group">
@@ -1335,6 +1475,13 @@ function displayArray($values) {
                     <div class="field-group">
                         <div class="field-label">Service Pricing</div>
                         <div class="field-value"><?php echo displayValue($form_data['servicePricing'] ?? ''); ?></div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field-label">Service Operations</div>
+                        <div class="field-value">
+                            <strong>Needs:</strong> <?php echo displayArray($form_data['serviceOperations'] ?? []); ?><br>
+                            <strong>Notes:</strong> <?php echo displayValue($form_data['serviceOperationNotes'] ?? ''); ?>
+                        </div>
                     </div>
 
                     <?php if (!empty($form_data['serviceDetailsFile'])): ?>
@@ -1393,6 +1540,35 @@ function displayArray($values) {
                             <?php endif; ?>
                         </div>
                     </div>
+                    <?php
+                    $productItems = [];
+                    foreach ($form_data as $key => $value) {
+                        if (preg_match('/^product_(\d+)_name$/', $key, $matches) && !empty($value)) {
+                            $index = $matches[1];
+                            $productItems[] = [
+                                'name' => $value,
+                                'price' => $form_data["product_{$index}_price"] ?? '',
+                                'description' => $form_data["product_{$index}_description"] ?? '',
+                                'image' => $form_data["product_{$index}_image"] ?? ''
+                            ];
+                        }
+                    }
+                    ?>
+                    <?php if (!empty($productItems)): ?>
+                        <div class="field-group">
+                            <div class="field-label">Individual Products</div>
+                            <div class="field-value">
+                                <?php foreach ($productItems as $item): ?>
+                                    <div style="margin-bottom: 10px;">
+                                        <strong><?php echo htmlspecialchars($item['name']); ?></strong>
+                                        <?php if (!empty($item['price'])): ?> - <?php echo displayValue($item['price']); ?><?php endif; ?><br>
+                                        <?php if (!empty($item['description'])): ?><?php echo displayValue($item['description']); ?><br><?php endif; ?>
+                                        <?php if (!empty($item['image'])): ?><small>Image: <?php echo displayValue($item['image']); ?></small><?php endif; ?>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                 <?php endif; ?>
 
                 
@@ -1543,6 +1719,13 @@ function displayArray($values) {
                             <div class="field-label">Inventory Type</div>
                             <div class="field-value"><?php echo displayValue(ucfirst($form_data['inventoryType'] ?? '')); ?></div>
                         </div>
+                        <div class="field-group">
+                            <div class="field-label">Store Operations</div>
+                            <div class="field-value">
+                                <strong>Needs:</strong> <?php echo displayArray($form_data['ecommerceOperations'] ?? []); ?><br>
+                                <strong>Notes:</strong> <?php echo displayValue($form_data['ecommerceOperationNotes'] ?? ''); ?>
+                            </div>
+                        </div>
                     <?php endif; ?>
                 </div>
             </div>
@@ -1562,8 +1745,20 @@ function displayArray($values) {
                             <strong>Keywords:</strong> <?php echo displayValue($form_data['keywords']); ?><br>
                         <?php endif; ?>
                         <?php if (!empty($form_data['competitors'])): ?>
-                            <strong>Competitors:</strong> <?php echo displayValue($form_data['competitors']); ?>
+                            <strong>Competitors:</strong> <?php echo displayValue($form_data['competitors']); ?><br>
                         <?php endif; ?>
+                        <?php if (!empty($form_data['avoidWebsites'])): ?>
+                            <strong>Avoid:</strong> <?php echo displayValue($form_data['avoidWebsites']); ?><br>
+                        <?php endif; ?>
+                        <?php if (!empty($form_data['targetLocations'])): ?>
+                            <strong>Target Locations:</strong> <?php echo displayValue($form_data['targetLocations']); ?><br>
+                        <?php endif; ?>
+                        <?php if (!empty($form_data['googleBusinessProfile'])): ?>
+                            <strong>Google Business Profile:</strong> <?php echo displayValue($form_data['googleBusinessProfile']); ?><br>
+                        <?php endif; ?>
+                        <strong>Trust Assets:</strong> <?php echo displayArray($form_data['trustAssets'] ?? []); ?><br>
+                        <strong>Legal Needs:</strong> <?php echo displayArray($form_data['legalNeeds'] ?? []); ?><br>
+                        <strong>Legal / Trust Notes:</strong> <?php echo displayValue($form_data['legalTrustNotes'] ?? ''); ?>
                     </div>
                 </div>
 
@@ -1576,6 +1771,10 @@ function displayArray($values) {
                 <!-- Social Media Subsection -->
                 <div class="subsection">
                     <h4 style="color: #2c3e50; border-bottom: 2px solid #e67e22; padding-bottom: 8px; margin-bottom: 18px;">📱 SOCIAL MEDIA</h4>
+                    <div class="field-group">
+                        <div class="field-label">Show Social Icons</div>
+                        <div class="field-value"><?php echo displayValue($form_data['showSocialIcons'] ?? ''); ?></div>
+                    </div>
                     <div class="field-group">
                         <div class="field-label">Social Media Links</div>
                         <div class="field-value">
@@ -1625,6 +1824,30 @@ function displayArray($values) {
                 </div>
 
                 <div class="field-group">
+                    <div class="field-label">Working Hours</div>
+                    <div class="field-value">
+                        <strong>Mode:</strong> <?php echo displayValue($form_data['workingHoursMode'] ?? ''); ?><br>
+                        <?php if (!empty($form_data['openDays'])): ?>
+                            <strong>Open Days:</strong> <?php echo displayArray($form_data['openDays']); ?><br>
+                        <?php endif; ?>
+                        <?php if (!empty($form_data['openingTime']) || !empty($form_data['closingTime'])): ?>
+                            <strong>Hours:</strong> <?php echo displayValue(($form_data['openingTime'] ?? '') . ' - ' . ($form_data['closingTime'] ?? '')); ?>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <div class="field-group">
+                    <div class="field-label">Approval & Communication</div>
+                    <div class="field-value">
+                        <strong>Decision Maker:</strong> <?php echo displayValue($form_data['decisionMaker'] ?? ''); ?><br>
+                        <strong>Reviewers:</strong> <?php echo displayValue($form_data['reviewerCount'] ?? ''); ?><br>
+                        <strong>Preferred Communication:</strong> <?php echo displayValue($form_data['preferredCommunication'] ?? ''); ?><br>
+                        <strong>Best Contact Time:</strong> <?php echo displayValue($form_data['bestContactTime'] ?? ''); ?><br>
+                        <strong>Deadline Reason:</strong> <?php echo displayValue($form_data['deadlineReason'] ?? ''); ?><br>
+                        <strong>Uncertainties:</strong> <?php echo displayValue($form_data['clientUncertainties'] ?? ''); ?>
+                    </div>
+                </div>
+
+                <div class="field-group">
                     <div class="field-label">Custom Features & Forms</div>
                     <div class="field-value">
                         <?php
@@ -1664,6 +1887,14 @@ function displayArray($values) {
                     <div class="field-value"><?php echo displayValue($form_data['formRequirements']); ?></div>
                 </div>
                 <?php endif; ?>
+                <div class="field-group">
+                    <div class="field-label">Lead Routing</div>
+                    <div class="field-value">
+                        <strong>Destinations:</strong> <?php echo displayArray($form_data['leadDestinations'] ?? []); ?><br>
+                        <strong>Notification Email:</strong> <?php echo displayValue($form_data['leadNotificationEmail'] ?? ''); ?><br>
+                        <strong>Auto Reply:</strong> <?php echo displayValue($form_data['leadAutoReply'] ?? ''); ?>
+                    </div>
+                </div>
 
                 <div class="field-group">
                     <div class="field-label">Website Structure</div>

@@ -1021,6 +1021,501 @@
             font-weight: 500;
             margin-left: 10px;
         }
+
+        .welcome-panel {
+            min-height: calc(100vh - 150px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+        }
+
+        .welcome-panel.hidden {
+            display: none;
+        }
+
+        .welcome-content {
+            max-width: 760px;
+            text-align: center;
+        }
+
+        .welcome-content h2 {
+            font-size: 2.8rem;
+            color: #2c3e50;
+            margin-bottom: 16px;
+        }
+
+        .welcome-content p {
+            color: #5f6c7b;
+            font-size: 1.15rem;
+            margin-bottom: 28px;
+        }
+
+        .option-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        .option-card {
+            display: block;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            padding: 14px 16px;
+            background: #fff;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .option-card:hover {
+            border-color: #667eea;
+            transform: translateY(-1px);
+        }
+
+        .option-card input {
+            margin-right: 8px;
+        }
+
+        .limit-note {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-top: 8px;
+        }
+
+        .update-toast {
+            position: fixed;
+            right: 24px;
+            bottom: 84px;
+            background: #198754;
+            color: #fff;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-weight: 700;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(10px);
+            transition: all 0.25s ease;
+            z-index: 1001;
+        }
+
+        .update-toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Apple-inspired visual polish */
+        :root {
+            --ui-bg: #f5f5f7;
+            --ui-panel: rgba(255, 255, 255, 0.86);
+            --ui-panel-solid: #ffffff;
+            --ui-text: #1d1d1f;
+            --ui-muted: #6e6e73;
+            --ui-border: rgba(0, 0, 0, 0.1);
+            --ui-blue: #0071e3;
+            --ui-blue-dark: #005bb5;
+            --ui-green: #34c759;
+            --ui-red: #ff3b30;
+            --ui-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.47059;
+            color: var(--ui-text);
+            background:
+                radial-gradient(circle at top right, rgba(0, 113, 227, 0.12), transparent 34%),
+                radial-gradient(circle at bottom left, rgba(52, 199, 89, 0.08), transparent 30%),
+                var(--ui-bg);
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        .container {
+            background: transparent;
+        }
+
+        .sidebar {
+            width: 300px;
+            padding: 72px 18px 28px;
+            background: rgba(246, 246, 248, 0.82);
+            border-right: 1px solid rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(24px) saturate(1.45);
+            box-shadow: 18px 0 40px rgba(0, 0, 0, 0.04);
+        }
+
+        .sidebar h3 {
+            color: var(--ui-text);
+            font-size: 1.1rem;
+            letter-spacing: 0;
+            margin: 0 10px 24px;
+            font-weight: 700;
+        }
+
+        .nav-item {
+            margin-bottom: 6px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-height: 44px;
+            padding: 10px 12px;
+            color: #424245;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .nav-link::before {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 113, 227, 0.1);
+            color: var(--ui-blue);
+            font-size: 0.88rem;
+            font-weight: 800;
+            flex: 0 0 28px;
+        }
+
+        .nav-link[data-section="project-basics"]::before { content: "✦"; }
+        .nav-link[data-section="technical"]::before { content: "⌘"; }
+        .nav-link[data-section="content"]::before { content: "◐"; }
+        .nav-link[data-section="products"]::before { content: "▣"; }
+        .nav-link[data-section="marketing"]::before { content: "↗"; }
+        .nav-link[data-section="final"]::before { content: "✓"; }
+
+        .nav-link:hover {
+            background: rgba(0, 113, 227, 0.08);
+            color: var(--ui-text);
+            transform: none;
+        }
+
+        .nav-link.active {
+            background: var(--ui-panel-solid);
+            color: var(--ui-text);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-link.completed {
+            color: var(--ui-muted);
+        }
+
+        .nav-link.completed::after {
+            color: var(--ui-green);
+        }
+
+        .form-content {
+            margin-left: 300px;
+            padding: 0 42px 42px;
+        }
+
+        .header {
+            background: transparent;
+            color: var(--ui-text);
+            padding: 38px 24px 28px;
+        }
+
+        .header-logo {
+            max-width: 178px;
+            margin-bottom: 18px;
+            filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.08));
+        }
+
+        .header h1 {
+            font-size: clamp(2.2rem, 4vw, 4.4rem);
+            line-height: 1.05;
+            font-weight: 800;
+            letter-spacing: 0;
+            margin-bottom: 12px;
+        }
+
+        .header p {
+            color: var(--ui-muted);
+            font-size: 1.08rem;
+            opacity: 1;
+        }
+
+        .welcome-panel {
+            min-height: calc(100vh - 230px);
+        }
+
+        .welcome-content {
+            background: var(--ui-panel);
+            border: 1px solid rgba(255, 255, 255, 0.72);
+            border-radius: 8px;
+            padding: 54px;
+            box-shadow: var(--ui-shadow);
+            backdrop-filter: blur(18px) saturate(1.25);
+        }
+
+        .welcome-content h2 {
+            color: var(--ui-text);
+            font-size: clamp(2.6rem, 6vw, 5.8rem);
+            line-height: 0.98;
+            font-weight: 800;
+            letter-spacing: 0;
+        }
+
+        .welcome-content p {
+            color: var(--ui-muted);
+            font-size: 1.14rem;
+            max-width: 560px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section,
+        .page-content-section,
+        .contact-form-section,
+        .dynamic-item,
+        .custom-field-row,
+        .navigation-item {
+            background: var(--ui-panel);
+            border: 1px solid rgba(255, 255, 255, 0.72);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.045);
+            backdrop-filter: blur(18px) saturate(1.2);
+        }
+
+        .section {
+            padding: 28px;
+            margin-bottom: 22px;
+            border-radius: 8px;
+        }
+
+        .section h2 {
+            color: var(--ui-text);
+            font-size: 1.42rem;
+            line-height: 1.15;
+            border-bottom: 1px solid var(--ui-border);
+            padding-bottom: 14px;
+            letter-spacing: 0;
+        }
+
+        .section-header {
+            border-bottom: 0;
+            padding: 8px 0 18px;
+        }
+
+        .section-header h2 {
+            color: var(--ui-text);
+            font-size: 1.78rem;
+            font-weight: 750;
+            letter-spacing: 0;
+        }
+
+        .section-toggle {
+            color: var(--ui-blue);
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            color: var(--ui-text);
+            font-size: 0.94rem;
+            font-weight: 650;
+            letter-spacing: 0;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group input[type="url"],
+        .form-group input[type="date"],
+        .form-group input[type="time"],
+        .form-group input[type="number"],
+        .form-group input[type="password"],
+        .form-group select,
+        .form-group textarea {
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(0, 0, 0, 0.14);
+            border-radius: 8px;
+            color: var(--ui-text);
+            font-size: 0.98rem;
+            padding: 13px 14px;
+            transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--ui-blue);
+            box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.16);
+            background: #fff;
+        }
+
+        .radio-option,
+        .checkbox-option,
+        .option-card,
+        .contact-field-checkbox,
+        .page-tab-btn {
+            background: rgba(255, 255, 255, 0.86);
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            border-radius: 8px;
+            color: #424245;
+            font-size: 0.95rem;
+            font-weight: 550;
+        }
+
+        .radio-option,
+        .checkbox-option {
+            padding: 10px 12px;
+        }
+
+        .radio-option input[type="radio"],
+        .checkbox-option input[type="checkbox"],
+        .contact-field-checkbox input[type="checkbox"],
+        .option-card input {
+            accent-color: var(--ui-blue);
+        }
+
+        .option-card:has(input:checked),
+        .radio-option:has(input:checked),
+        .checkbox-option:has(input:checked),
+        .contact-field-checkbox:has(input:checked) {
+            border-color: rgba(0, 113, 227, 0.55);
+            background: rgba(0, 113, 227, 0.08);
+            color: var(--ui-text);
+        }
+
+        .option-card:hover,
+        .contact-field-checkbox:hover,
+        .page-tab-btn:hover {
+            border-color: rgba(0, 113, 227, 0.45);
+            background: #fff;
+            transform: none;
+        }
+
+        .conditional-field {
+            background: rgba(255, 255, 255, 0.62);
+            border-left: 3px solid var(--ui-blue);
+            border-radius: 8px;
+        }
+
+        .btn,
+        .nav-btn,
+        .add-custom-field-btn {
+            border-radius: 8px;
+            font-weight: 700;
+            letter-spacing: 0;
+        }
+
+        .btn-primary,
+        .nav-btn-next {
+            background: var(--ui-blue);
+            color: #fff;
+            box-shadow: 0 8px 20px rgba(0, 113, 227, 0.22);
+        }
+
+        .btn-primary:hover,
+        .nav-btn-next:hover {
+            background: var(--ui-blue-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 12px 24px rgba(0, 113, 227, 0.25);
+        }
+
+        .btn-secondary,
+        .nav-btn-prev {
+            background: #e8e8ed;
+            color: var(--ui-text);
+        }
+
+        .btn-secondary:hover,
+        .nav-btn-prev:hover {
+            background: #dcdce1;
+            transform: translateY(-1px);
+        }
+
+        .btn-add,
+        .add-custom-field-btn {
+            background: var(--ui-green);
+            color: #fff;
+        }
+
+        .btn-remove,
+        .remove-custom-field-btn {
+            background: var(--ui-red);
+        }
+
+        .section-navigation {
+            border-top: 1px solid var(--ui-border);
+        }
+
+        .page-tab-btn.active {
+            background: var(--ui-blue);
+            border-color: var(--ui-blue);
+        }
+
+        .page-content-header {
+            border-bottom: 1px solid rgba(0, 113, 227, 0.26);
+        }
+
+        .page-content-header h4 {
+            color: var(--ui-text);
+        }
+
+        .page-count-badge {
+            background: var(--ui-blue);
+            border-radius: 999px;
+        }
+
+        .thank-you-section h1,
+        .loader-text,
+        .file-name,
+        .password-toggle:hover {
+            color: var(--ui-blue);
+        }
+
+        .loader {
+            border-top-color: var(--ui-blue);
+        }
+
+        .clear-data-btn {
+            background: #ff453a;
+            border-radius: 8px;
+        }
+
+        .auto-save-indicator,
+        .update-toast {
+            background: rgba(29, 29, 31, 0.9);
+            border-radius: 999px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 100%;
+                border-right: 0;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+                border-radius: 0;
+                padding: 22px;
+            }
+
+            .form-content {
+                margin-left: 0;
+                padding: 0 20px 32px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .welcome-content {
+                padding: 34px 22px;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .header {
+                padding: 28px 12px 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1056,7 +1551,15 @@
                 <p>Fill what you know. Leave the rest to us.</p>
             </div>
 
-            <form id="requirementForm" action="./submit_form.php" method="post" enctype="multipart/form-data" novalidate>
+            <div class="welcome-panel" id="welcomePanel">
+                <div class="welcome-content">
+                    <h2>Welcome</h2>
+                    <p>Use this guided application to share the details we need for an informational website or online store.</p>
+                    <button type="button" class="btn btn-primary" id="createApplicationBtn">Create Application</button>
+                </div>
+            </div>
+
+            <form id="requirementForm" action="./submit_form.php" method="post" enctype="multipart/form-data" novalidate style="display: none;">
                 <div class="form-validation-banner" id="formValidationBanner" role="alert" aria-live="polite"></div>
                 <div class="success-message" id="successMessage">
                     <strong>Success!</strong> Your form has been submitted. Check the console for the form data.
@@ -1081,6 +1584,29 @@
                     <div class="section-content">
                     <!-- Section 1: Project Requirement & Planning -->
                 <div class="section">
+                    <div class="form-group">
+                        <label class="required">What are you creating?</label>
+                        <div class="option-grid">
+                            <label class="option-card">
+                                <input type="radio" name="applicationType" value="informational" required> Informational Website
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="applicationType" value="online-store" required> Online Store
+                            </label>
+                        </div>
+                        <div class="error-message">Please select application type</div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="required">Brand Name</label>
+                            <input type="text" name="brandName" required placeholder="Your public brand name">
+                            <div class="error-message">Please enter brand name</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Brief Brand Description</label>
+                            <input type="text" name="brandShortDescription" placeholder="e.g., Products for comfort lovers">
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="required">Project Type</label>
                         <select name="projectType" required>
@@ -1121,6 +1647,47 @@
                     <div class="form-group">
                         <label>Project Description</label>
                         <textarea name="projectDescription" placeholder="Describe your project goals and requirements..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Primary Website Goals</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-option"><input type="checkbox" name="businessGoals" value="generate-leads"> Generate leads</label>
+                            <label class="checkbox-option"><input type="checkbox" name="businessGoals" value="sell-online"> Sell products online</label>
+                            <label class="checkbox-option"><input type="checkbox" name="businessGoals" value="build-trust"> Build trust</label>
+                            <label class="checkbox-option"><input type="checkbox" name="businessGoals" value="show-portfolio"> Show portfolio</label>
+                            <label class="checkbox-option"><input type="checkbox" name="businessGoals" value="book-appointments"> Book appointments</label>
+                            <label class="checkbox-option"><input type="checkbox" name="businessGoals" value="share-information"> Share information</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Target Audience</label>
+                        <textarea name="targetAudience" placeholder="Who is this website for? Mention age group, location, profession, budget level, or customer type."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Visitor Problem / Need</label>
+                        <textarea name="visitorProblem" placeholder="What problem should the website help visitors solve?"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Primary Visitor Action</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-option"><input type="checkbox" name="visitorActions" value="call"> Call us</label>
+                            <label class="checkbox-option"><input type="checkbox" name="visitorActions" value="whatsapp"> WhatsApp us</label>
+                            <label class="checkbox-option"><input type="checkbox" name="visitorActions" value="inquiry-form"> Fill inquiry form</label>
+                            <label class="checkbox-option"><input type="checkbox" name="visitorActions" value="buy-now"> Buy now</label>
+                            <label class="checkbox-option"><input type="checkbox" name="visitorActions" value="book-appointment"> Book appointment</label>
+                            <label class="checkbox-option"><input type="checkbox" name="visitorActions" value="download-brochure"> Download brochure</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>What matters most?</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-option"><input type="checkbox" name="priorityFocus" value="fast-launch"> Fast launch</label>
+                            <label class="checkbox-option"><input type="checkbox" name="priorityFocus" value="premium-design"> Premium design</label>
+                            <label class="checkbox-option"><input type="checkbox" name="priorityFocus" value="seo"> SEO</label>
+                            <label class="checkbox-option"><input type="checkbox" name="priorityFocus" value="low-cost"> Low cost</label>
+                            <label class="checkbox-option"><input type="checkbox" name="priorityFocus" value="easy-editing"> Easy editing</label>
+                            <label class="checkbox-option"><input type="checkbox" name="priorityFocus" value="automation"> Automation / integrations</label>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label class="required">Target Launch Date</label>
@@ -1226,6 +1793,30 @@
                                 </label>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label>Where is the domain registered?</label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="domainRegistrationSource" value="getspace"> Getspace
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="domainRegistrationSource" value="other-provider"> Another Provider
+                                </label>
+                            </div>
+                        </div>
+                        <div class="conditional-field" id="externalDomainManagement">
+                            <div class="form-group">
+                                <label>Domain Redirection Handling</label>
+                                <div class="radio-group">
+                                    <label class="radio-option">
+                                        <input type="radio" name="domainManagementPreference" value="team-handles"> Please take care of my domain name
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="domainManagementPreference" value="client-handles"> I will take care of my domain name myself
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                         <div class="conditional-field" id="domainLoginDetails">
                             <div class="row">
                                 <div class="form-group">
@@ -1271,6 +1862,10 @@
                             </label>
                         </div>
                         <div class="error-message">Please select an option</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Getspace Registration Email</label>
+                        <input type="email" name="getspaceRegistrationEmail" placeholder="Email used to register at Getspace">
                     </div>
                     <div class="conditional-field" id="hostingYes">
                         <div class="row">
@@ -1446,17 +2041,89 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="required">Website Page Style</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="websitePageStyle" value="one-page" required> One page
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="websitePageStyle" value="multi-page" required> Multi-page
+                            </label>
+                        </div>
+                        <div class="error-message">Please select website page style</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Design Style</label>
+                        <select name="designStyle">
+                            <option value="">Select style</option>
+                            <option value="simple-minimal">Simple and minimalistic</option>
+                            <option value="modern-bold">Modern and bold</option>
+                            <option value="classic-professional">Classic and professional</option>
+                            <option value="luxury-premium">Luxury and premium</option>
+                            <option value="playful-colorful">Playful and colorful</option>
+                            <option value="team-choice">Use any style you think is suitable</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label>Color Preferences</label>
                         <div class="color-picker-wrapper">
                             <input type="color" id="colorPicker" value="#667eea">
                             <input type="text" name="colorPreferences" id="colorInput" placeholder="Select a color or enter hex code">
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label>Preset Color Scheme</label>
+                        <div class="option-grid">
+                            <label class="option-card"><input type="radio" name="colorScheme" value="team-choice"> Let team pick</label>
+                            <label class="option-card"><input type="radio" name="colorScheme" value="navy-gold"> Navy / Gold</label>
+                            <label class="option-card"><input type="radio" name="colorScheme" value="black-white"> Black / White</label>
+                            <label class="option-card"><input type="radio" name="colorScheme" value="green-cream"> Green / Cream</label>
+                            <label class="option-card"><input type="radio" name="colorScheme" value="blue-gray"> Blue / Gray</label>
+                            <label class="option-card"><input type="radio" name="colorScheme" value="red-charcoal"> Red / Charcoal</label>
+                            <label class="option-card"><input type="radio" name="colorScheme" value="teal-sand"> Teal / Sand</label>
+                            <label class="option-card"><input type="radio" name="colorScheme" value="purple-silver"> Purple / Silver</label>
+                            <label class="option-card"><input type="radio" name="colorScheme" value="orange-ink"> Orange / Ink</label>
+                            <label class="option-card"><input type="radio" name="colorScheme" value="pink-brown"> Pink / Brown</label>
+                            <label class="option-card"><input type="radio" name="colorScheme" value="earth-neutral"> Earth / Neutral</label>
+                            <label class="option-card"><input type="radio" name="colorScheme" value="custom-colors"> Custom codes above</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Font Preference</label>
+                            <select name="fontPreference">
+                                <option value="">Select font preference</option>
+                                <option value="team-choice">Let team pick two suitable fonts</option>
+                                <option value="clean-sans">Clean sans-serif</option>
+                                <option value="classic-serif">Classic serif</option>
+                                <option value="modern-geometric">Modern geometric</option>
+                                <option value="elegant-display">Elegant display</option>
+                                <option value="custom">I will provide a font</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Font URL / Name</label>
+                            <input type="text" name="fontUrl" placeholder="Google Fonts URL, font name, or file link">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Design Reference Websites</label>
+                        <div class="row-three">
+                            <input type="url" name="referenceWebsite1" placeholder="Website URL 1">
+                            <input type="url" name="referenceWebsite2" placeholder="Website URL 2">
+                            <input type="url" name="referenceWebsite3" placeholder="Website URL 3">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Design Comments</label>
+                        <textarea name="designComments" placeholder="Describe what you like from the reference websites, focusing on design and style."></textarea>
+                    </div>
                 </div>
 
                 <!-- Section 5: Website Structure -->
                 <div class="section">
                     <h2>5. Website Structure <span id="pageCountBadge" class="page-count-badge">Total: 0 pages</span></h2>
+                    <p class="limit-note">Up to 12 pages are included by default. Additional pages can still be requested and discussed with the project manager.</p>
                     <div class="form-group">
                         <label class="required">Header Pages (Main Navigation)</label>
                         <div class="checkbox-group">
@@ -1583,12 +2250,37 @@
                         <label>Form Requirements</label>
                         <textarea name="formRequirements" placeholder="Describe what forms you need and their fields (e.g., Contact form with name, email, message; Quote request form with product selection...)"></textarea>
                     </div>
+                    <div class="form-group">
+                        <label>Where should leads or form submissions go?</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-option"><input type="checkbox" name="leadDestinations" value="email"> Email</label>
+                            <label class="checkbox-option"><input type="checkbox" name="leadDestinations" value="whatsapp"> WhatsApp</label>
+                            <label class="checkbox-option"><input type="checkbox" name="leadDestinations" value="google-sheet"> Google Sheet</label>
+                            <label class="checkbox-option"><input type="checkbox" name="leadDestinations" value="crm"> CRM</label>
+                            <label class="checkbox-option"><input type="checkbox" name="leadDestinations" value="admin-dashboard"> Website admin dashboard</label>
+                            <label class="checkbox-option"><input type="checkbox" name="leadDestinations" value="not-sure"> Not sure, recommend for me</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Lead Notification Email</label>
+                            <input type="email" name="leadNotificationEmail" placeholder="Where should inquiries be sent?">
+                        </div>
+                        <div class="form-group">
+                            <label>Auto-reply Message</label>
+                            <input type="text" name="leadAutoReply" placeholder="Message visitors receive after submitting a form">
+                        </div>
+                    </div>
                 </div>
 
                     <div class="form-group">
                         <label>Navigation Structure (Drag to reorder)</label>
                         <div id="navigationList" class="navigation-list"></div>
                         <input type="hidden" name="navigationStructure" id="navigationStructureInput">
+                    </div>
+                    <div class="form-group">
+                        <label>Subpage / Dropdown Notes</label>
+                        <textarea name="subpageNotes" placeholder="Example: Custom Orders should be a dropdown under Home."></textarea>
                     </div>
                 </div>
 
@@ -1681,7 +2373,10 @@
                                 <input type="radio" name="hasLogo" value="yes"> Yes - I have logo
                             </label>
                             <label class="radio-option">
-                                <input type="radio" name="hasLogo" value="no"> No - I need logo design
+                                <input type="radio" name="hasLogo" value="temporary"> No - Create a temporary logo
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="hasLogo" value="professional"> I want a professional paid logo
                             </label>
                         </div>
                     </div>
@@ -1712,6 +2407,27 @@
                             <small style="color: #6c757d; margin-top: 5px; display: block;">Mention specific colors, symbols, icons, or design elements you want in your logo</small>
                         </div>
                     </div>
+                    <div class="conditional-field" id="temporaryLogo">
+                        <div class="form-group">
+                            <label>Temporary Logo Word / Symbol</label>
+                            <input type="text" name="temporaryLogoText" placeholder="Word, initials, number, or simple symbol">
+                        </div>
+                    </div>
+                    <div class="conditional-field" id="professionalLogo">
+                        <div class="form-group">
+                            <label>Professional Logo Word / Symbol</label>
+                            <input type="text" name="professionalLogoText" placeholder="Word, initials, number, or symbol">
+                        </div>
+                        <div class="form-group">
+                            <label>Logo Design Description</label>
+                            <textarea name="professionalLogoDescription" placeholder="Describe the style, mood, colors, and symbols you want."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Example Logo / Reference File</label>
+                            <input type="file" name="professionalLogoReference" accept="image/*,.pdf">
+                            <small class="limit-note">We will prepare three logo variations for selection.</small>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label>Brand Guidelines</label>
                         <textarea name="brandGuidelines" placeholder="Share any brand guidelines, style guides, or brand assets..."></textarea>
@@ -1726,6 +2442,15 @@
                             <option value="playful">Playful</option>
                             <option value="luxury">Luxury & Premium</option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Brand / Business Asset Links</label>
+                        <textarea name="assetLinks" placeholder="Add links to brochure, catalog, old website, brand guidelines, company profile, product catalog, photos, or videos."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Upload Important Business Files</label>
+                        <input type="file" name="businessAssetsFile" accept=".pdf,.doc,.docx,.xlsx,.xls,.zip,image/*">
+                        <small class="limit-note">Optional: brochures, catalogs, brand guide, company profile, product sheets, or photo folders.</small>
                     </div>
                 </div>
                     
@@ -1746,12 +2471,61 @@
                             </label>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label>Content Support Needed</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-option"><input type="checkbox" name="contentSupport" value="rewrite"> Rewrite my content</label>
+                            <label class="checkbox-option"><input type="checkbox" name="contentSupport" value="copywriting"> Create content from scratch</label>
+                            <label class="checkbox-option"><input type="checkbox" name="contentSupport" value="placeholder"> Use placeholder content first</label>
+                            <label class="checkbox-option"><input type="checkbox" name="contentSupport" value="proofread"> Proofread only</label>
+                            <label class="checkbox-option"><input type="checkbox" name="contentSupport" value="not-sure"> Not sure, recommend for me</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Media Support Needed</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-option"><input type="checkbox" name="mediaSupport" value="stock-images"> Use stock images</label>
+                            <label class="checkbox-option"><input type="checkbox" name="mediaSupport" value="image-editing"> Edit provided images</label>
+                            <label class="checkbox-option"><input type="checkbox" name="mediaSupport" value="product-cleanup"> Product photo cleanup</label>
+                            <label class="checkbox-option"><input type="checkbox" name="mediaSupport" value="banner-design"> Design banners</label>
+                            <label class="checkbox-option"><input type="checkbox" name="mediaSupport" value="video-embed"> Embed videos</label>
+                        </div>
+                    </div>
                     <div class="form-group conditional-field" id="contentFieldsContainer">
                         <label>Page Content (Based on selected pages in Website Structure)</label>
                         <!-- Page Content Tabs -->
                         <div id="pageContentTabs" class="page-content-tabs"></div>
                         <!-- Page Content Container -->
                         <div id="dynamicContentFields" class="page-content-container"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Page Extras</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="pageExtras" value="testimonials"> Testimonials
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="pageExtras" value="gallery"> Gallery
+                            </label>
+                        </div>
+                    </div>
+                    <div id="testimonialsBuilder" class="conditional-field">
+                        <h3>Testimonials</h3>
+                        <div id="testimonialItems"></div>
+                        <button type="button" class="btn btn-add" id="addTestimonialBtn">+ Add Testimonial</button>
+                    </div>
+                    <div id="galleryBuilder" class="conditional-field">
+                        <h3>Gallery</h3>
+                        <div class="form-group">
+                            <label>Gallery Title</label>
+                            <input type="text" name="galleryTitle" placeholder="Gallery title">
+                        </div>
+                        <div class="form-group">
+                            <label>Gallery Description</label>
+                            <textarea name="galleryDescription" placeholder="Describe this image gallery."></textarea>
+                        </div>
+                        <div id="galleryItems"></div>
+                        <button type="button" class="btn btn-add" id="addGalleryItemBtn">+ Add Gallery Image</button>
                     </div>
                 </div>
                         <div class="section-navigation">
@@ -1802,6 +2576,12 @@
                             <label>Product Images Google Drive Link</label>
                             <input type="url" name="productImagesLink" placeholder="https://drive.google.com/...">
                             <small style="color: #6c757d; margin-top: 5px; display: block;">Share the Google Drive link containing all product images</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Individual Products</label>
+                            <p class="limit-note">We add up to 16 products by default. You can add more later in the website admin.</p>
+                            <div id="productItems"></div>
+                            <button type="button" class="btn btn-add" id="addProductBtn">+ Add Product</button>
                         </div>
                         <div class="form-group">
                             <label>Filter Attributes (for product filtering)</label>
@@ -1857,6 +2637,21 @@
                         <div class="form-group">
                             <label>Service Pricing Details</label>
                             <textarea name="servicePricing" placeholder="Describe your pricing structure (e.g., hourly rates, project-based pricing, packages...)"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Service Business Details</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-option"><input type="checkbox" name="serviceOperations" value="service-areas"> Show service areas</label>
+                                <label class="checkbox-option"><input type="checkbox" name="serviceOperations" value="appointment-rules"> Appointment booking rules</label>
+                                <label class="checkbox-option"><input type="checkbox" name="serviceOperations" value="consultation-fees"> Consultation fees</label>
+                                <label class="checkbox-option"><input type="checkbox" name="serviceOperations" value="team-members"> Team/staff members</label>
+                                <label class="checkbox-option"><input type="checkbox" name="serviceOperations" value="before-after"> Before/after portfolio</label>
+                                <label class="checkbox-option"><input type="checkbox" name="serviceOperations" value="faq"> Service FAQs</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Service Areas / Booking Notes</label>
+                            <textarea name="serviceOperationNotes" placeholder="Locations served, booking rules, consultation fees, staff details, or other service workflow notes."></textarea>
                         </div>
                         <div class="form-group">
                             <label>Upload Service Details (PDF, Word, Excel)</label>
@@ -2018,6 +2813,21 @@
                             <label>Return Policy</label>
                             <textarea name="returnPolicy" placeholder="Describe your return policy..."></textarea>
                         </div>
+                        <div class="form-group">
+                            <label>Store Operations Needed</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-option"><input type="checkbox" name="ecommerceOperations" value="variants"> Product variants</label>
+                                <label class="checkbox-option"><input type="checkbox" name="ecommerceOperations" value="sku"> SKU management</label>
+                                <label class="checkbox-option"><input type="checkbox" name="ecommerceOperations" value="coupons"> Coupons/discounts</label>
+                                <label class="checkbox-option"><input type="checkbox" name="ecommerceOperations" value="delivery-partners"> Delivery partners</label>
+                                <label class="checkbox-option"><input type="checkbox" name="ecommerceOperations" value="tax-invoice"> Tax invoice</label>
+                                <label class="checkbox-option"><input type="checkbox" name="ecommerceOperations" value="order-notifications"> Order email/WhatsApp notifications</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Product Variant / Operations Notes</label>
+                            <textarea name="ecommerceOperationNotes" placeholder="Sizes, colors, materials, SKU rules, coupons, invoice needs, delivery partners, order notification rules."></textarea>
+                        </div>
                     </div>
                 </div>
                         <div class="section-navigation">
@@ -2048,6 +2858,46 @@
                     <div class="form-group">
                         <label>Competitor Websites</label>
                         <textarea name="competitors" placeholder="List competitor website URLs..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Websites you do not want to look like</label>
+                        <textarea name="avoidWebsites" placeholder="Optional: URLs or styles you want us to avoid."></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Target Cities / Regions</label>
+                            <input type="text" name="targetLocations" placeholder="e.g., Mumbai, Delhi NCR, United States">
+                        </div>
+                        <div class="form-group">
+                            <label>Google Business Profile Link</label>
+                            <input type="url" name="googleBusinessProfile" placeholder="https://g.page/...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Trust Assets Available</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-option"><input type="checkbox" name="trustAssets" value="testimonials"> Testimonials/reviews</label>
+                            <label class="checkbox-option"><input type="checkbox" name="trustAssets" value="certifications"> Certifications</label>
+                            <label class="checkbox-option"><input type="checkbox" name="trustAssets" value="awards"> Awards</label>
+                            <label class="checkbox-option"><input type="checkbox" name="trustAssets" value="press"> Press/media mentions</label>
+                            <label class="checkbox-option"><input type="checkbox" name="trustAssets" value="client-logos"> Client logos</label>
+                            <label class="checkbox-option"><input type="checkbox" name="trustAssets" value="case-studies"> Case studies</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Legal / Compliance Needs</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-option"><input type="checkbox" name="legalNeeds" value="privacy-policy"> Privacy Policy</label>
+                            <label class="checkbox-option"><input type="checkbox" name="legalNeeds" value="terms"> Terms & Conditions</label>
+                            <label class="checkbox-option"><input type="checkbox" name="legalNeeds" value="refund-policy"> Refund Policy</label>
+                            <label class="checkbox-option"><input type="checkbox" name="legalNeeds" value="shipping-policy"> Shipping Policy</label>
+                            <label class="checkbox-option"><input type="checkbox" name="legalNeeds" value="cookie-banner"> Cookie banner</label>
+                            <label class="checkbox-option"><input type="checkbox" name="legalNeeds" value="not-sure"> Not sure, recommend for me</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Legal / Trust Notes</label>
+                        <textarea name="legalTrustNotes" placeholder="Company registration, certificates, awards, compliance requirements, or trust elements to show."></textarea>
                     </div>
                     <div class="form-group">
                         <label>Google Analytics</label>
@@ -2097,6 +2947,17 @@
                 <!-- Social Media Section -->
                 <div class="section">
                     <h2>11. Social Media</h2>
+                    <div class="form-group">
+                        <label>Add social media icons to website?</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="showSocialIcons" value="yes"> Yes
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="showSocialIcons" value="no"> No
+                            </label>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label>Facebook</label>
                         <input type="url" name="facebookUrl" placeholder="https://facebook.com/yourpage">
@@ -2175,8 +3036,92 @@
                         <textarea name="businessAddress" placeholder="Full business address..."></textarea>
                     </div>
                     <div class="form-group">
+                        <label>Working Hours</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="workingHoursMode" value="always-open"> Always open
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="workingHoursMode" value="selected-hours"> Open for selected hours
+                            </label>
+                        </div>
+                    </div>
+                    <div class="conditional-field" id="selectedHoursSection">
+                        <div class="form-group">
+                            <label>Open Days</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-option"><input type="checkbox" name="openDays" value="monday"> Monday</label>
+                                <label class="checkbox-option"><input type="checkbox" name="openDays" value="tuesday"> Tuesday</label>
+                                <label class="checkbox-option"><input type="checkbox" name="openDays" value="wednesday"> Wednesday</label>
+                                <label class="checkbox-option"><input type="checkbox" name="openDays" value="thursday"> Thursday</label>
+                                <label class="checkbox-option"><input type="checkbox" name="openDays" value="friday"> Friday</label>
+                                <label class="checkbox-option"><input type="checkbox" name="openDays" value="saturday"> Saturday</label>
+                                <label class="checkbox-option"><input type="checkbox" name="openDays" value="sunday"> Sunday</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label>Opening Time</label>
+                                <input type="time" name="openingTime">
+                            </div>
+                            <div class="form-group">
+                                <label>Closing Time</label>
+                                <input type="time" name="closingTime">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label>Additional Notes or Requirements</label>
                         <textarea name="additionalNotes" placeholder="Any other information you'd like to share..."></textarea>
+                    </div>
+                    <div class="section">
+                        <h2>Approval & Communication</h2>
+                        <div class="row">
+                            <div class="form-group">
+                                <label>Final Decision Maker</label>
+                                <input type="text" name="decisionMaker" placeholder="Name or role of final approver">
+                            </div>
+                            <div class="form-group">
+                                <label>Number of Reviewers</label>
+                                <input type="number" name="reviewerCount" min="1" placeholder="e.g., 2">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label>Preferred Communication Method</label>
+                                <select name="preferredCommunication">
+                                    <option value="">Select method</option>
+                                    <option value="whatsapp">WhatsApp</option>
+                                    <option value="email">Email</option>
+                                    <option value="call">Phone call</option>
+                                    <option value="video-call">Video call</option>
+                                    <option value="project-manager">Through project manager</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Best Time To Contact</label>
+                                <input type="text" name="bestContactTime" placeholder="e.g., Weekdays after 3 PM">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Deadline Reason</label>
+                            <input type="text" name="deadlineReason" placeholder="Launch, event, campaign, store opening, investor meeting, etc.">
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2>Brief Quality Check</h2>
+                        <p class="limit-note">Adding reference websites, photos, target audience, primary visitor action, and lead destination helps us build faster with fewer follow-ups.</p>
+                        <div class="form-group">
+                            <label>Anything you are unsure about?</label>
+                            <textarea name="clientUncertainties" placeholder="Tell us what you want us to recommend: platform, colors, content, SEO, ecommerce setup, domain, hosting, or anything else."></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-option" style="font-weight: 600;">
+                            <input type="checkbox" name="informationConfirmed" value="yes" required>
+                            I have provided all the information available and checked the required pages.
+                        </label>
+                        <div class="error-message">Please confirm before submitting</div>
                     </div>
                         <div class="section-navigation">
                             <button type="button" class="nav-btn nav-btn-prev" data-prev="marketing">← Previous</button>
@@ -2196,6 +3141,7 @@
 
     <!-- Auto-Save Indicator -->
     <div class="auto-save-indicator" id="autoSaveIndicator">✓ Auto-saved</div>
+    <div class="update-toast" id="updateToast">Updated successfully</div>
 
     <script>
         // ============================================
@@ -2408,7 +3354,7 @@
             data.timestamp = new Date().toISOString();
 
             // Normalize repeated checkbox groups into arrays for reliable restore
-            ['headerPages', 'footerPages', 'customFeatures', 'filterAttributes', 'paymentMethods', 'currencies'].forEach(name => {
+            ['headerPages', 'footerPages', 'customFeatures', 'filterAttributes', 'paymentMethods', 'currencies', 'pageExtras', 'openDays', 'businessGoals', 'visitorActions', 'priorityFocus', 'contentSupport', 'mediaSupport', 'leadDestinations', 'serviceOperations', 'ecommerceOperations', 'trustAssets', 'legalNeeds'].forEach(name => {
                 const values = Array.from(form.querySelectorAll(`input[name="${name}"]:checked`)).map(input => input.value);
                 data[name] = values;
             });
@@ -2443,7 +3389,7 @@
 
             existingData.timestamp = new Date().toISOString();
 
-            ['headerPages', 'footerPages', 'customFeatures', 'filterAttributes', 'paymentMethods', 'currencies'].forEach(name => {
+            ['headerPages', 'footerPages', 'customFeatures', 'filterAttributes', 'paymentMethods', 'currencies', 'pageExtras', 'openDays', 'businessGoals', 'visitorActions', 'priorityFocus', 'contentSupport', 'mediaSupport', 'leadDestinations', 'serviceOperations', 'ecommerceOperations', 'trustAssets', 'legalNeeds'].forEach(name => {
                 existingData[name] = Array.from(form.querySelectorAll(`input[name="${name}"]:checked`)).map(input => input.value);
             });
 
@@ -2469,7 +3415,7 @@
                     return;
                 }
 
-                const checkboxNames = ['headerPages', 'footerPages', 'customFeatures', 'filterAttributes', 'paymentMethods', 'currencies'];
+                const checkboxNames = ['headerPages', 'footerPages', 'customFeatures', 'filterAttributes', 'paymentMethods', 'currencies', 'pageExtras', 'openDays', 'businessGoals', 'visitorActions', 'priorityFocus', 'contentSupport', 'mediaSupport', 'leadDestinations', 'serviceOperations', 'ecommerceOperations', 'trustAssets', 'legalNeeds'];
 
                 clearPageSelections();
                 checkboxNames.forEach(name => {
@@ -2573,12 +3519,21 @@
 
         function showAutoSaveIndicator() {
             const indicator = document.getElementById('autoSaveIndicator');
-            if (!indicator) return;
-
-            indicator.classList.add('show');
+            const updateToast = document.getElementById('updateToast');
+            if (indicator) {
+                indicator.classList.add('show');
+            }
+            if (updateToast) {
+                updateToast.classList.add('show');
+            }
             clearTimeout(autoSaveTimeout);
             autoSaveTimeout = setTimeout(() => {
-                indicator.classList.remove('show');
+                if (indicator) {
+                    indicator.classList.remove('show');
+                }
+                if (updateToast) {
+                    updateToast.classList.remove('show');
+                }
             }, AUTO_SAVE_DELAY);
         }
 
@@ -2632,6 +3587,7 @@
             const badge = document.getElementById('pageCountBadge');
             if (badge) {
                 badge.textContent = `(${totalCount} page${totalCount !== 1 ? 's' : ''})`;
+                badge.style.background = totalCount > 12 ? '#dc3545' : '#667eea';
             }
         }
 
@@ -3080,6 +4036,26 @@
 
             // Add auto-save event listeners to all form inputs
             const form = document.getElementById('requirementForm');
+            const welcomePanel = document.getElementById('welcomePanel');
+            const createApplicationBtn = document.getElementById('createApplicationBtn');
+
+            function showApplicationForm() {
+                if (welcomePanel) {
+                    welcomePanel.classList.add('hidden');
+                }
+                if (form) {
+                    form.style.display = 'block';
+                }
+            }
+
+            if (localStorage.getItem(STORAGE_KEY)) {
+                showApplicationForm();
+            }
+
+            if (createApplicationBtn) {
+                createApplicationBtn.addEventListener('click', showApplicationForm);
+            }
+
             if (form) {
                 const inputs = form.querySelectorAll('input, textarea, select');
                 inputs.forEach(input => {
@@ -3221,6 +4197,22 @@
             }
 
             // Dynamic show/hide logic
+            // Application type
+            const applicationTypeRadios = document.querySelectorAll('input[name="applicationType"]');
+            applicationTypeRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    const ecommerceChoice = document.querySelector(`input[name="isEcommerce"][value="${this.value === 'online-store' ? 'yes' : 'no'}"]`);
+                    if (ecommerceChoice) {
+                        ecommerceChoice.checked = true;
+                        ecommerceChoice.dispatchEvent(new Event('change', { bubbles: true }));
+                    }
+                    const styleChoice = document.querySelector(`input[name="websitePageStyle"][value="${this.value === 'online-store' ? 'multi-page' : 'one-page'}"]`);
+                    if (styleChoice && !document.querySelector('input[name="websitePageStyle"]:checked')) {
+                        styleChoice.checked = true;
+                    }
+                });
+            });
+
             // Project Type
             const projectTypeSelect = document.querySelector('select[name="projectType"]');
             const otherProjectType = document.getElementById('otherProjectType');
@@ -3347,6 +4339,16 @@
                 });
             });
 
+            const domainRegistrationRadios = document.querySelectorAll('input[name="domainRegistrationSource"]');
+            const externalDomainManagement = document.getElementById('externalDomainManagement');
+            domainRegistrationRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (externalDomainManagement) {
+                        externalDomainManagement.classList.toggle('show', this.value === 'other-provider');
+                    }
+                });
+            });
+
             // Hosting
             const hostingRadios = document.querySelectorAll('input[name="hasHosting"]');
             const hostingYes = document.getElementById('hostingYes');
@@ -3458,21 +4460,31 @@
             const logoRadios = document.querySelectorAll('input[name="hasLogo"]');
             const logoYes = document.getElementById('logoYes');
             const logoNo = document.getElementById('logoNo');
+            const temporaryLogo = document.getElementById('temporaryLogo');
+            const professionalLogo = document.getElementById('professionalLogo');
 
             logoRadios.forEach(radio => {
                 radio.addEventListener('change', function() {
+                    logoYes.classList.remove('show');
+                    logoNo.classList.remove('show');
+                    if (temporaryLogo) temporaryLogo.classList.remove('show');
+                    if (professionalLogo) professionalLogo.classList.remove('show');
+
                     if (this.value === 'yes') {
-                        logoYes.classList.add('show');      // Show upload option only
-                        logoNo.classList.remove('show');     // Hide size & colors
+                        logoYes.classList.add('show');
+                    } else if (this.value === 'temporary') {
+                        if (temporaryLogo) temporaryLogo.classList.add('show');
+                    } else if (this.value === 'professional') {
+                        if (professionalLogo) professionalLogo.classList.add('show');
                     } else if (this.value === 'no') {
-                        logoYes.classList.remove('show');     // Hide upload option
-                        logoNo.classList.add('show');       // Show size & colors
-                    } else {
-                        logoYes.classList.remove('show');
-                        logoNo.classList.remove('show');
+                        logoNo.classList.add('show');
                     }
                 });
             });
+            const logoChecked = document.querySelector('input[name="hasLogo"]:checked');
+            if (logoChecked) {
+                logoChecked.dispatchEvent(new Event('change', { bubbles: true }));
+            }
 
             // Company Details Checkbox
             const addCompanyDetailsCheckbox = document.getElementById('addCompanyDetails');
@@ -3602,6 +4614,20 @@
                 });
             });
 
+            const workingHoursRadios = document.querySelectorAll('input[name="workingHoursMode"]');
+            const selectedHoursSection = document.getElementById('selectedHoursSection');
+            workingHoursRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (selectedHoursSection) {
+                        selectedHoursSection.classList.toggle('show', this.value === 'selected-hours');
+                    }
+                });
+            });
+            const workingHoursChecked = document.querySelector('input[name="workingHoursMode"]:checked');
+            if (workingHoursChecked) {
+                workingHoursChecked.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+
             // Dynamic Pages
             let pageCount = 0;
             const addPageBtn = document.getElementById('addPageBtn');
@@ -3624,10 +4650,126 @@
                             <option value="footer">Footer (Footer Links)</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label>Parent Page (optional)</label>
+                        <input type="text" name="additionalPageParent_${pageCount}" placeholder="Leave blank for top-level page">
+                    </div>
                     <button type="button" class="btn btn-add" onclick="addPageToCheckboxGroup(this)">Add to Website Structure</button>
                 `;
                 additionalPages.appendChild(pageDiv);
             });
+
+            const pageExtrasCheckboxes = document.querySelectorAll('input[name="pageExtras"]');
+            const testimonialsBuilder = document.getElementById('testimonialsBuilder');
+            const galleryBuilder = document.getElementById('galleryBuilder');
+
+            function updatePageExtrasVisibility() {
+                const selectedExtras = Array.from(document.querySelectorAll('input[name="pageExtras"]:checked')).map(input => input.value);
+                if (testimonialsBuilder) {
+                    testimonialsBuilder.classList.toggle('show', selectedExtras.includes('testimonials'));
+                }
+                if (galleryBuilder) {
+                    galleryBuilder.classList.toggle('show', selectedExtras.includes('gallery'));
+                }
+            }
+
+            pageExtrasCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', updatePageExtrasVisibility);
+            });
+            updatePageExtrasVisibility();
+
+            let testimonialCount = document.querySelectorAll('#testimonialItems .dynamic-item').length;
+            const addTestimonialBtn = document.getElementById('addTestimonialBtn');
+            if (addTestimonialBtn) {
+                addTestimonialBtn.addEventListener('click', function() {
+                    testimonialCount++;
+                    const item = document.createElement('div');
+                    item.className = 'dynamic-item';
+                    item.innerHTML = `
+                        <button type="button" class="btn btn-remove" onclick="this.parentElement.remove();">Remove</button>
+                        <div class="row-three">
+                            <div class="form-group">
+                                <label>Customer Name</label>
+                                <input type="text" name="testimonial_${testimonialCount}_name">
+                            </div>
+                            <div class="form-group">
+                                <label>Date</label>
+                                <input type="date" name="testimonial_${testimonialCount}_date">
+                            </div>
+                            <div class="form-group">
+                                <label>Customer Image</label>
+                                <input type="file" name="testimonial_${testimonialCount}_image" accept="image/*">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Testimonial Text</label>
+                            <textarea name="testimonial_${testimonialCount}_text" placeholder="Customer feedback"></textarea>
+                        </div>
+                    `;
+                    document.getElementById('testimonialItems').appendChild(item);
+                    debouncedSave();
+                });
+            }
+
+            let galleryCount = document.querySelectorAll('#galleryItems .dynamic-item').length;
+            const addGalleryItemBtn = document.getElementById('addGalleryItemBtn');
+            if (addGalleryItemBtn) {
+                addGalleryItemBtn.addEventListener('click', function() {
+                    galleryCount++;
+                    const item = document.createElement('div');
+                    item.className = 'dynamic-item';
+                    item.innerHTML = `
+                        <button type="button" class="btn btn-remove" onclick="this.parentElement.remove();">Remove</button>
+                        <div class="form-group">
+                            <label>Gallery Image</label>
+                            <input type="file" name="gallery_${galleryCount}_image" accept="image/*">
+                        </div>
+                        <div class="form-group">
+                            <label>Caption / Notes</label>
+                            <input type="text" name="gallery_${galleryCount}_caption" placeholder="Optional caption">
+                        </div>
+                    `;
+                    document.getElementById('galleryItems').appendChild(item);
+                    debouncedSave();
+                });
+            }
+
+            let productCount = document.querySelectorAll('#productItems .dynamic-item').length;
+            const addProductBtn = document.getElementById('addProductBtn');
+            if (addProductBtn) {
+                addProductBtn.addEventListener('click', function() {
+                    if (productCount >= 16) {
+                        alert('The included setup covers 16 products. Add remaining products later in the website admin or discuss expansion with the project manager.');
+                        return;
+                    }
+                    productCount++;
+                    const item = document.createElement('div');
+                    item.className = 'dynamic-item';
+                    item.innerHTML = `
+                        <button type="button" class="btn btn-remove" onclick="this.parentElement.remove();">Remove</button>
+                        <div class="row-three">
+                            <div class="form-group">
+                                <label>Product Name</label>
+                                <input type="text" name="product_${productCount}_name">
+                            </div>
+                            <div class="form-group">
+                                <label>Price</label>
+                                <input type="number" name="product_${productCount}_price" step="0.01">
+                            </div>
+                            <div class="form-group">
+                                <label>Product Image</label>
+                                <input type="file" name="product_${productCount}_image" accept="image/*">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea name="product_${productCount}_description" placeholder="Product description"></textarea>
+                        </div>
+                    `;
+                    document.getElementById('productItems').appendChild(item);
+                    debouncedSave();
+                });
+            }
 
             // Dynamic Content Fields based on selected pages
             const headerPagesCheckboxes = document.querySelectorAll('input[name="headerPages"]');
@@ -3656,6 +4798,29 @@
             updateDynamicContentFields();
             updateNavigationList();
             updatePageCount();
+            [
+                'applicationType',
+                'domainRegistrationSource',
+                'domainLogin',
+                'hostingLogin',
+                'hasDomain',
+                'hasHosting',
+                'hasSSL',
+                'sslPurchase',
+                'hasTheme',
+                'hasShopifyAccount',
+                'hasLogo',
+                'isEcommerce',
+                'hasAnalytics',
+                'hasPrivacyPolicy',
+                'hasTerms',
+                'workingHoursMode'
+            ].forEach(name => {
+                const checked = document.querySelector(`input[name="${name}"]:checked`);
+                if (checked) {
+                    checked.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+            });
 
             const validationBanner = document.getElementById('formValidationBanner');
 
@@ -3768,6 +4933,24 @@
                                 }
                                 radioGroup.forEach(r => r.classList.remove('error'));
                             }
+                        } else if (input.type === 'checkbox') {
+                            console.log(`Checkbox ${input.name}: checked = ${input.checked}`);
+                            if (!input.checked) {
+                                isValid = false;
+                                if (formGroup) {
+                                    formGroup.classList.add('error');
+                                }
+                                input.classList.add('error');
+                                if (!firstInvalidInput) {
+                                    firstInvalidInput = input;
+                                }
+                                console.log(`Checkbox ${input.name} is invalid`);
+                            } else {
+                                if (formGroup) {
+                                    formGroup.classList.remove('error');
+                                }
+                                input.classList.remove('error');
+                            }
                         } else {
                             // Handle other input types
                             console.log(`Input ${input.name}: value = "${input.value}"`);
@@ -3795,6 +4978,7 @@
                     // Scroll to first invalid field if validation fails
                     if (!isValid && firstInvalidInput) {
                         showValidationBanner(`Please complete the required field: ${getFieldLabel(firstInvalidInput)} (${getSectionLabel(firstInvalidInput)}).`);
+                        revealSectionForField(firstInvalidInput);
                         loader.classList.remove('show');
                         loader.style.display = 'none';
                         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -3830,6 +5014,7 @@
                     // Scroll to first invalid email field if email validation fails
                     if (!isValid && firstInvalidInput) {
                         showValidationBanner(`Please enter a valid ${getFieldLabel(firstInvalidInput)} (${getSectionLabel(firstInvalidInput)}).`);
+                        revealSectionForField(firstInvalidInput);
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                         return;
                     }
@@ -3846,7 +5031,19 @@
                                 'customFeatures',
                                 'filterAttributes',
                                 'paymentMethods',
-                                'currencies'
+                                'currencies',
+                                'pageExtras',
+                                'openDays',
+                                'businessGoals',
+                                'visitorActions',
+                                'priorityFocus',
+                                'contentSupport',
+                                'mediaSupport',
+                                'leadDestinations',
+                                'serviceOperations',
+                                'ecommerceOperations',
+                                'trustAssets',
+                                'legalNeeds'
                             ]);
 
                             for (const [key, value] of rawFormData.entries()) {
